@@ -36,6 +36,7 @@ http.get(options, function (err, resp, body) {
 });
 
 
+app.get('/jiva', (req, res) => {
 
 var options = {
     url: `http://${process.argv[4]}:5656/latest/volumes/`,
@@ -59,9 +60,10 @@ http.get(options, function (err, resp, body) {
         console.log("this is volume lis http");
     }
     // console.log(body +' this is body1')
+    res.status(200).json({ body });
 });
 
-
+});
 
 app.use('/sample', api);
 app.use('/person', api1);
