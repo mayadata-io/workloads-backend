@@ -53,14 +53,14 @@ http.get(options, function (err, resp, body) {
         console.log("this is volume erro namespaces ");
     } else {
         data = JSON.parse(body);
-        console.log(body);
+        console.log(data);
         //   numberOfrepo = JSON.parse(body).length;
         console.log("this is volume lis http");
         //    console.log(resp);
         console.log("this is volume lis http");
     }
     // console.log(body +' this is body1')
-    res.status(200).json({ body });
+    res.status(200).json({ data });
 });
 
 });
