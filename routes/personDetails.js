@@ -1,6 +1,7 @@
 const mongo = require('../config/dbconnection');
 const express = require('express');
 const randomString = require('randomstring');
+const url = require('url')
 const router = express();
 
 
@@ -18,11 +19,22 @@ const User = mongo.model('person', personSchema);
 
 
 /* GET all users. */
-router.get('/read', (req, res) => {
-    User.find({rNumber:req.rNumber}, (err, users) => {
+router.get('/read/:rNumber', (req, res) => {
+    console.log(req);
+    User.find({rNumber: req.params.rNumber}, (err, users) => {
         if (err) res.status(500).send(error)
         console.log('this is user api');
-        res.status(200).json({ users });
+        console.log(users);
+        res.status(200).json(users);
+    });
+});
+
+router.get('/read', (req, res) => {
+    User.find({}, (err, users) => {
+        if (err) res.status(500).send(error)
+        console.log('this is user api');
+        // console.log(users);
+        res.status(200).json(users);
     });
 });
 
@@ -34,7 +46,7 @@ router.post('/save', (req, res) => {
         age: req.body.age,
         rNumber: req.body.rNumber
     });
-console.log(user);
+// console.log(user);
     user.save(error => {
         if (error) res.status(500).send(error);
 
