@@ -49,12 +49,13 @@ router.post('/delete', (req, res) => {
         rNumber: req.body.rNumber
     });
     User.deleteOne({ name: user.name ,rNumber:user.rNumber }, function (err) {
-        if(err==null){
-            res.status(500).json();
-        }else{
-            res.status(201).json();
-        }
+        // if(err==null){
+        //     res.status(500).json();
+        // }else{
+        //     res.status(201).json();
+        // }
         // console.log(err);
+        res.status(201).json();
     });
 
 });
