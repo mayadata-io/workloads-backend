@@ -5,6 +5,7 @@ const api1 = require('./routes/personDetails')
 const kube = require('./routes/kubernets')
 const app = express();
 const http = require('request');
+const k8s = require('@kubernetes/client-node');
 
 
 app.use(bodyParser.json());
@@ -67,12 +68,36 @@ http.get(options, function (err, resp, body) {
 });
 
 
-const Client = require('kubernetes-client').Client;
-const config = require('kubernetes-client').config;
-const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
-const namespaces = client.api.v1.namespaces.get();
-console.log(namespaces);
-console.log('this is name spaces file')
+// const Client = require('kubernetes-client').Client;
+// const config = require('kubernetes-client').config;
+// const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
+// const namespaces = client.api.v1.namespaces.get();
+// console.log(namespaces);
+// console.log('this is name spaces file')
+
+
+var k8sApi = k8s.Config.defaultClient();
+var namespace = {
+    metadata: {
+      name: 'test'
+    }
+  };
+  
+  k8sApi.createNamespace(namespace).then(
+    (response) => {
+      console.log('Created namespace');
+      console.log(response);
+      k8sApi.readNamespace(namespace.metadata.name).then(
+        (response) => {
+          console.log(response);
+          k8sApi.deleteNamespace(
+            namespace.metadata.name, {} /* delete options */);
+        });
+    },
+    (err) => {
+      console.log('Error!: ' + err);
+    }
+  );
 
 app.use('/sample', api);
 app.use('/person', api1);
