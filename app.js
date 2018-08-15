@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const api = require('./routes/api');
 const api1 = require('./routes/personDetails')
+const kube = require('./routes/kubernets')
 const app = express();
 const http = require('request');
 
@@ -67,4 +68,5 @@ http.get(options, function (err, resp, body) {
 
 app.use('/sample', api);
 app.use('/person', api1);
+app.use('/',kube);
 module.exports = app;

@@ -6,3 +6,7 @@ k8sApi.listNamespacedPod('default')
         console.log(res.body);
         console.log("this kubernettes");
     });
+console.log('this is kube ');
+
+module.exports = k8sApi;
+    
