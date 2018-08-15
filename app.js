@@ -40,66 +40,91 @@ http.get(options, function (err, resp, body) {
 
 app.get('/jiva', (req, res) => {
 
-var options = {
-    url: `http://${process.argv[4]}:5656/latest/volumes/`,
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-    }
-};
+    var options = {
+        url: `http://${process.argv[4]}:5656/latest/volumes/`,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
 
-http.get(options, function (err, resp, body) {
-    if (err) {
-        //   reject(err);
-        console.log(err);
-        console.log("this is volume erro namespaces ");
-    } else {
-        data = JSON.parse(body);
-        console.log(data);
-        //   numberOfrepo = JSON.parse(body).length;
-        console.log("this is volume lis http");
-        //    console.log(resp);
-        console.log("this is volume lis http");
-    }
-    // console.log(body +' this is body1')
-    res.status(200).json({ data });
+    http.get(options, function (err, resp, body) {
+        if (err) {
+            //   reject(err);
+            console.log(err);
+            console.log("this is volume erro namespaces ");
+        } else {
+            data = JSON.parse(body);
+            console.log(data);
+            //   numberOfrepo = JSON.parse(body).length;
+            console.log("this is volume lis http");
+            //    console.log(resp);
+            console.log("this is volume lis http");
+        }
+        // console.log(body +' this is body1')
+        res.status(200).json({ data });
+    });
+
 });
 
-});
+
+const Client = require('kubernetes-client').Client;
+
+async function main() {
+    console.log(process.env.K8S_CLUSTER_HOST)
+    console.log(process.env.K8S_USER)
+    console.log(process.env.K8S_PASSWORD)
+
+    try {
+        const client = new Client({
+            config: {
+                url: process.env.K8S_CLUSTER_HOST,
+                auth: {
+                    user: process.env.K8S_USER,
+                    pass: process.env.K8S_PASSWORD
+                },
+                insecureSkipTlsVerify: true
+            },
+            version: process.env.K8S_CLUSTER_VERSION
+        });
+
+        //
+        // Fetch all the pods
+        const pods = await client.api.v1.pods.get();
+        pods.body.items.forEach((item) => {
+            console.log(item.metadata);
+        });
+
+        //
+        // Fetch the Deployment from the kube-system namespace.
+        //
+        const deployment = await client.apis.apps.v1.namespaces('kube-system').deployments().get();
+        deployment.body.items.forEach((item) => {
+            console.log(item.metadata);
+        });
+
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}
+
+main();
+
 
 
 // const Client = require('kubernetes-client').Client;
-// const config = require('kubernetes-client').config;
-// const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
-// const namespaces = client.api.v1.namespaces.get();
-// console.log(namespaces);
-// console.log('this is name spaces file')
-
-
-var k8sApi = k8s.Config.defaultClient();
-var namespace = {
-    metadata: {
-      name: 'test'
-    }
-  };
-  
-  k8sApi.createNamespace(namespace).then(
-    (response) => {
-      console.log('Created namespace');
-      console.log(response);
-      k8sApi.readNamespace(namespace.metadata.name).then(
-        (response) => {
-          console.log(response);
-          k8sApi.deleteNamespace(
-            namespace.metadata.name, {} /* delete options */);
-        });
-    },
-    (err) => {
-      console.log('Error!: ' + err);
-    }
-  );
+// const client = new Client({
+//     config: {
+//         url: 'https://35.226.103.206',
+//         auth: {
+//             user: 'admin',
+//             pass: '4NGNyLBzcN7uoKAJ',
+//         },
+//         insecureSkipTlsVerify: true,
+//     }
+// })
 
 app.use('/sample', api);
 app.use('/person', api1);
-app.use('/',kube);
+app.use('/', kube);
 module.exports = app;
