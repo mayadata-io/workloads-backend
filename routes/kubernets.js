@@ -4,8 +4,8 @@ const randomString = require('randomstring');
 const router = express();
 
 
-router.get('/', (req, res) => {
-
+router.get('', (req, res) => {
+    var k8sApi = k8s.Config.defaultClient();
     var namespace = {
         metadata: {
           name: 'test'
