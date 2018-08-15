@@ -27,6 +27,7 @@ router.get('/', (req, res) => {
           console.log('Error!: ' + err);
         }
       );
+      console.log('this is name space')
 });
 
 
