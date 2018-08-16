@@ -8,7 +8,7 @@ k8sApi.setDefaultAuthentication(kc);
 
 k8sApi.listNamespacedPod('mongo-jiva')
     .then((res) => {
-	console.log(res.body);
+	console.log(res.body.items);
     })
     .catch((err) => {
         console.log(err);
