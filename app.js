@@ -5,7 +5,7 @@ const api1 = require('./routes/personDetails')
 const kube = require('./routes/kubernets')
 const app = express();
 const http = require('request');
-const k8s = require('@kubernetes/client-node');
+// const k8s = require('@kubernetes/client-node');
 
 
 app.use(bodyParser.json());
@@ -66,49 +66,55 @@ app.get('/jiva', (req, res) => {
     });
 
 });
+const k8s = require('@kubernetes/client-node');
 
+var k8sApi = k8s.Config.defaultClient();
+k8sApi.listNamespacedPod('mongo-jiva')
+   .then((res) => {
+       console.log(res.body.items);
+   });
 
-const Client = require('kubernetes-client').Client;
+// const Client = require('kubernetes-client').Client;
 
-async function main() {
-    console.log(process.env.K8S_CLUSTER_HOST)
-    console.log(process.env.K8S_USER)
-    console.log(process.env.K8S_PASSWORD)
+// async function main() {
+//     console.log(process.env.K8S_CLUSTER_HOST)
+//     console.log(process.env.K8S_USER)
+//     console.log(process.env.K8S_PASSWORD)
 
-    try {
-        const client = new Client({
-            config: {
-                url: process.env.K8S_CLUSTER_HOST,
-                auth: {
-                    user: process.env.K8S_USER,
-                    pass: process.env.K8S_PASSWORD
-                },
-                insecureSkipTlsVerify: true
-            },
-            version: process.env.K8S_CLUSTER_VERSION
-        });
+//     try {
+//         const client = new Client({
+//             config: {
+//                 url: process.env.K8S_CLUSTER_HOST,
+//                 auth: {
+//                     user: process.env.K8S_USER,
+//                     pass: process.env.K8S_PASSWORD
+//                 },
+//                 insecureSkipTlsVerify: true
+//             },
+//             version: process.env.K8S_CLUSTER_VERSION
+//         });
 
-        //
-        // Fetch all the pods
-        const pods = await client.api.v1.pods.get();
-        pods.body.items.forEach((item) => {
-            console.log(item.metadata);
-        });
+//         //
+//         // Fetch all the pods
+//         const pods = await client.api.v1.pods.get();
+//         pods.body.items.forEach((item) => {
+//             console.log(item.metadata);
+//         });
 
-        //
-        // Fetch the Deployment from the kube-system namespace.
-        //
-        const deployment = await client.apis.apps.v1.namespaces('kube-system').deployments().get();
-        deployment.body.items.forEach((item) => {
-            console.log(item.metadata);
-        });
+//         //
+//         // Fetch the Deployment from the kube-system namespace.
+//         //
+//         const deployment = await client.apis.apps.v1.namespaces('kube-system').deployments().get();
+//         deployment.body.items.forEach((item) => {
+//             console.log(item.metadata);
+//         });
 
-    } catch (err) {
-        console.error('Error: ', err);
-    }
-}
+//     } catch (err) {
+//         console.error('Error: ', err);
+//     }
+// }
 
-main();
+// main();
 
 
 
