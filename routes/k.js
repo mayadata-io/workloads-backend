@@ -13,3 +13,14 @@ k8sApi.listNamespacedPod('mongo-jiva')
     .catch((err) => {
         console.log(err);
     });
+
+console.log('this is pvc')
+
+k8sApi.listNamespacedPersistentVolumeClaim('mongo-jiva')
+    .then((res) => {
+	console.log(res.body.items);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
