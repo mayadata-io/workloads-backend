@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const api1 = require('./routes/personDetails');
 const api = require('./routes/api');
 const podStatus = require('./routes/kub');
+const sequenceDiagram = require('./routes/kubesequence');
 const app = express();
 const http = require('request');
 
@@ -123,5 +124,6 @@ app.get('/jiva', (req, res) => {
 app.use('/sample', api);
 app.use('/person', api1);
 app.use('/pod',podStatus)
+app.use('/pods',sequenceDiagram)
 
 module.exports = app;
