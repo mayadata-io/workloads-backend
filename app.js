@@ -1,12 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const api1 = require('./routes/personDetails');
 const api = require('./routes/api');
-const api1 = require('./routes/personDetails')
-const kube = require('./routes/kubernets')
+const podStatus = require('./routes/kub');
 const app = express();
 const http = require('request');
-// const k8s = require('@kubernetes/client-node');
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -66,71 +64,64 @@ app.get('/jiva', (req, res) => {
     });
 
 });
-const k8s = require('@kubernetes/client-node');
 
-var k8sApi = k8s.Config.defaultClient();
-k8sApi.listNamespacedPod('mongo-jiva')
-   .then((res) => {
-       console.log(res.body.items);
-   });
+// const k8s = require('@kubernetes/client-node');
 
-// const Client = require('kubernetes-client').Client;
+// var k8sApi = k8s.Config.defaultClient();
+// k8sApi.listNamespacedPod('mongo-jiva')
+//     .then((res) => {
+//         var overAllStatus = "";
+//         var overAllStatusCount = 0;
+//         var status = {
+//             Running: 0,
+//             Pending: 1,
+//             Failed: 2,
+//             Unknown: 3
+//         }
+//         var allStatus = {
+//             status: String,
+//             podStatus :[]
+//         }
+//         // for (i = 0; i < res.body.items.length; i++) {
+//         //     if (res.body.items[i].metadata.ownerReferences[0].kind == 'StatefulSet') {
+//         //         console.log('kind : ' + res.body.items[i].metadata.ownerReferences[0].kind);
+//         //         console.log('name : ' + res.body.items[i].metadata.name);
+//         //         console.log('namespace : ' + res.body.items[i].metadata.namespace);
+//         //         console.log('node name : ' + res.body.items[i].spec.nodeName);
+//         //         console.log('volume name : ' + res.body.items[i].spec.volumes[0].name);
+//         //         console.log('persistentVolumeClaim name : ' + res.body.items[i].spec.volumes[0].persistentVolumeClaim.claimName);
+//         //         console.log('status :' + res.body.items[i].status.phase);
+//         //     } else if (res.body.items[i].metadata.ownerReferences[0].kind == 'ReplicaSet') {
+//         //         console.log('kind : ' + res.body.items[i].metadata.ownerReferences[0].kind);
+//         //         console.log('name : ' + res.body.items[i].metadata.name);
+//         //         console.log('namespace : ' + res.body.items[i].metadata.namespace);
+//         //         if (res.body.items[i].metadata.labels.pvc != undefined && res.body.items[i].metadata.labels.vsm != undefined) {
+//         //             console.log('pvc : ' + res.body.items[i].metadata.labels.pvc);
+//         //             console.log('vsm : ' + res.body.items[i].metadata.labels.vsm);
+//         //         }
+//         //         console.log('node name : ' + res.body.items[i].spec.nodeName);
+//         //         console.log('status :' + res.body.items[i].status.phase)
+//         //     }
+//         // }
 
-// async function main() {
-//     console.log(process.env.K8S_CLUSTER_HOST)
-//     console.log(process.env.K8S_USER)
-//     console.log(process.env.K8S_PASSWORD)
+//         for (i = 0; i < res.body.items.length; i++) {
+//             if (status[res.body.items[i].status.phase] >= overAllStatusCount) {
+//                 overAllStatusCount = res.body.items[i].status.phase;
+//                 allStatus.status = res.body.items[i].status.phase
+//             }
+//              allStatus.podStatus.push({
+//                  name:res.body.items[i].metadata.name,
+//                  status: res.body.items[i].status.phase,
+//                  kind: res.body.items[i].metadata.ownerReferences[0].kind
+//              });
 
-//     try {
-//         const client = new Client({
-//             config: {
-//                 url: process.env.K8S_CLUSTER_HOST,
-//                 auth: {
-//                     user: process.env.K8S_USER,
-//                     pass: process.env.K8S_PASSWORD
-//                 },
-//                 insecureSkipTlsVerify: true
-//             },
-//             version: process.env.K8S_CLUSTER_VERSION
-//         });
+//         }
+//         console.log(allStatus);
 
-//         //
-//         // Fetch all the pods
-//         const pods = await client.api.v1.pods.get();
-//         pods.body.items.forEach((item) => {
-//             console.log(item.metadata);
-//         });
-
-//         //
-//         // Fetch the Deployment from the kube-system namespace.
-//         //
-//         const deployment = await client.apis.apps.v1.namespaces('kube-system').deployments().get();
-//         deployment.body.items.forEach((item) => {
-//             console.log(item.metadata);
-//         });
-
-//     } catch (err) {
-//         console.error('Error: ', err);
-//     }
-// }
-
-// main();
-
-
-
-// const Client = require('kubernetes-client').Client;
-// const client = new Client({
-//     config: {
-//         url: 'https://35.226.103.206',
-//         auth: {
-//             user: 'admin',
-//             pass: '4NGNyLBzcN7uoKAJ',
-//         },
-//         insecureSkipTlsVerify: true,
-//     }
-// })
+//     });
 
 app.use('/sample', api);
 app.use('/person', api1);
-app.use('/', kube);
+app.use('/pod',podStatus)
+
 module.exports = app;
