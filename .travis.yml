@@ -11,7 +11,7 @@ script:
   - echo $TRAVIS_PULL_REQUEST
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
 after_success:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" != "false" ]; then
   docker push mayadata/www-mongo-jiva-test-backend:$TRAVIS_BRANCH-$COMMIT ;
   fi
 
