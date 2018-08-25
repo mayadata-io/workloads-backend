@@ -2,7 +2,32 @@ const mongo = require("../config/dbconnection");
 const express = require("express");
 const randomString = require("randomstring");
 const router = express();
-var k8s = require("../config/createK8sJob");
+// require("../config/createK8sJob.js");
+// var another = require("../config/createK8sJob.js");
+
+//Entrypoint main
+function initJob(app) {
+  const Client = require("kubernetes-client").Client;
+  const config = require("kubernetes-client").config;
+
+  const deploymentManifest = require("./" + app + ".json");
+  createJob(deploymentManifest, config, Client);
+}
+
+async function createJob(deploymentManifest, config, Client) {
+  try {
+    const client = new Client({
+      config: config.fromKubeconfig(),
+      version: "1.9"
+    });
+    const create = await client.apis.batch.v1
+      .namespaces("litmus")
+      .jobs.post({ body: deploymentManifest });
+    console.log("Result: ", create);
+  } catch (err) {
+    console.error("Error: ", err);
+  }
+}
 
 // create mongoose schema
 const userSchema = new mongo.Schema({
@@ -104,21 +129,30 @@ router.post("/detail", (req, res) => {
 });
 
 // api for calling kubernetes client
-router.post("/k8s/mongo", (req, res) => {
-  try {
-    r = k8s.initJob(req.body.app);
-  } catch {
-    console.log("Error" + r);
-  }
+// router.post("/k8s/mongo", (req, res) => {
+//   try {
+//     r = k8s.initJob(req.body.app);
+//   } catch {
+//     console.log("Error" + r);
+//   }
 
-  console.log(user);
-  user.save(error => {
-    if (error) res.status(500).send(error);
+//   console.log(user);
+//   user.save(error => {
+//     if (error) res.status(500).send(error);
 
-    res.status(201).json({
-      message: "kubectl done"
-    });
+//     res.status(201).json({
+//       message: "kubectl done"
+//     });
+//   });
+// });
+
+router.get("/k8s/mongo", (req, res) => {
+  User.find({}, (err, users) => {
+    if (err) res.status(500).send(error);
+    console.log(req.query.app);
+    r = initJob(req.query.app);
+    res.status(200).json({ users });
+    console.log(r);
   });
 });
-
 module.exports = router;
