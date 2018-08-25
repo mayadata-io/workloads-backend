@@ -9,17 +9,14 @@ const router = express();
 function initJob(app) {
   const Client = require("kubernetes-client").Client;
   const config = require("kubernetes-client").config;
-
   const deploymentManifest = require("./" + app + ".json");
   createJob(deploymentManifest, config, Client);
 }
 
 async function createJob(deploymentManifest, config, Client) {
   try {
-    const client = new Client({
-      config: config.fromKubeconfig(),
-      version: "1.9"
-    });
+    const client = new Client({ config: config.getInCluster() });
+    await client.loadSpec();
     const create = await client.apis.batch.v1
       .namespaces("litmus")
       .jobs.post({ body: deploymentManifest });
