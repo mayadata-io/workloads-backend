@@ -23,10 +23,10 @@ router.get('/read/:rNumber', (req, res) => {
     // console.log(req);
     // {rNumber: req.params.rNumber}
     User.find({}, (err, users) => {
-        if (err) res.status(500).send({ erro: error, status: 500 })
+        if (err) res.status(500).send({ message: err, status: 500 })
         console.log('this is user api');
         console.log(users);
-        res.status(200).json({ u: users, status: 200 ,message:"Done all the reading" });
+        res.status(200).json({ u: users, status: 200, message: "Done all the reading" });
     });
 });
 
@@ -59,9 +59,9 @@ router.post('/save', (req, res) => {
 router.post('/save1', (req, res) => {
     User.collection.insert(req.body, function (err, doc) {
         if (err) {
-            return res.status(500).json({ erro: err, status: 500 })
+            return res.status(500).json({ message: err, status: 500 })
         } else {
-            res.status(201).json({ status: 200,message:"Data is saved" });
+            res.status(201).json({ status: 200, message: "Data is saved" });
         }
     })
 });
