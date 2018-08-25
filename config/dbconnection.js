@@ -1,7 +1,7 @@
-const mongoConnection = require('mongoose');
+const mongoConnection = require("mongoose");
 
 // MongoDB URL for database connection
-// const dbHost = 'mongodb://127.0.0.1:27017/maya';
+// const dbHost = "mongodb://127.0.0.1:27017/maya";
 const dbHost = `${process.argv[2]}/maya`;
 console.log(dbHost);
 
