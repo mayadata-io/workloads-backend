@@ -145,11 +145,16 @@ router.post("/detail", (req, res) => {
 
 router.get("/k8s/mongo", (req, res) => {
   User.find({}, (err, users) => {
-    if (err) res.status(500).send(error);
-    console.log(req.query.app);
-    r = initJob(req.query.app);
+    if (err) res.status(500).send(error)
+    console.log("hitting the api /k8s/mongo")
+    var app = req.query.app;
+    // console.log(app)
+    var chaos = req.query.chaos;
+    // console.log(chaos)
+    var params = app + "-" + chaos;
+    r = initJob(params);
     res.status(200).json({ users });
-    console.log(r);
+    // console.log(r);
   });
 });
 module.exports = router;
