@@ -16,9 +16,9 @@ function initJob(app) {
 async function createJob(deploymentManifest, config, Client) {
   try {
 
-    // const client = new Client({ config: config.getInCluster() });
-    // await client.loadSpec();
-    const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
+    const client = new Client({ config: config.getInCluster() });
+    await client.loadSpec();
+    // const client = new Client({ config: config.fromKubeconfig(), version: '1.9' });
 
     const create = await client.apis.batch.v1
       .namespaces("litmus")
