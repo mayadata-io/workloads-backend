@@ -1,0 +1,37 @@
+var async = require('async');
+var fs = require('fs');
+var pg = require('pg');
+
+const createDb = require('./databasecreatedb');
+
+
+// Connect to the "bank" database.
+var config = {
+    user: 'root',
+    host: `${process.argv[2]}` ,
+    database: 'maya',
+    port: 26257
+};
+
+// Create a pool.
+var connection = new pg.Pool(config);
+
+connection.connect(function (err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+      }
+      console.log('connected as id ' + connection.threadId);
+
+    
+    let createMaya = `create table if not exists person(
+        rNumber INT, name VARCHAR,email VARCHAR, age INT
+    )`;
+    connection.query(createMaya, function (err, results, fields) {
+        if (err) {
+            console.log(err.message);
+        }
+        console.log('table created ..')
+    });
+});
+module.exports = connection;
