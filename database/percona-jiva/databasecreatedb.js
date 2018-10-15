@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: `${process.argv[2]}`,
+  host: 'percona-mysql.percona-jiva',
   port: '3306',
   user: 'root',
-  password: `${process.argv[3]}`,
+  password: 'k8sDem0',
 });
 
 var connectWithRetry = function () {
