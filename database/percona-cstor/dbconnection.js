@@ -3,10 +3,10 @@ var mysql = require('mysql');
 const createDb = require('./databasecreatedb');
 
 var connection = mysql.createConnection({
-  host     : `${process.argv[2]}`,
+  host     : 'percona-mysql.percona-cstor',
   port     : '3306',
   user     : 'root',
-  password : `${process.argv[3]}`,
+  password : 'k8sDem0',
   database :  "maya"
 });
  

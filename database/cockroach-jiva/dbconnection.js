@@ -8,7 +8,7 @@ const createDb = require('./databasecreatedb');
 // Connect to the "bank" database.
 var config = {
     user: 'root',
-    host: `${process.argv[2]}` ,
+    host: 'cockroachdb.cockroach-jiva' ,
     database: 'maya',
     port: 26257
 };
