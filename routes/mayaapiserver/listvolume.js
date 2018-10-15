@@ -8,7 +8,7 @@ const mayaapiIp = `${process.argv[6]}`;
 const applicationDeployedNamespaces = `mongo-jiva`;
 
 var options = {
-    url: `http://${mayaapiIp}:5656/latest/volumes/`,
+    url: `http://maya-apiserver-service.openebs:5656/latest/volumes/`,
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ http.get(options, function (err, resp, body) {
 router.get('/volume', (req, res) => {
     var mayaVolume = [];
     var options = {
-        url: `http://${mayaapiIp}:5656/latest/volumes/`,
+        url: `http://maya-apiserver-service.openebs:5656/latest/volumes/`,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

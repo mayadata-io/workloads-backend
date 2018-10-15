@@ -4,7 +4,7 @@ const app = express();
 const http = require('request');
 
 
-// const databaseQuery = require('./database/connections')
+const databaseQuery = require('./database/connections')
 const podStatus = require('./routes/kubernetes/kub');
 const sequenceDiagram = require('./routes/kubernetes/kubesequence');
 const yaml = require('./routes/yaml');
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 
-// app.use('/person',databaseQuery); 
+app.use('/person',databaseQuery); 
 app.use('/pod',podStatus)
 app.use('/pods',sequenceDiagram) 
 app.use('/workloads',yaml);
