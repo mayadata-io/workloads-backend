@@ -7,6 +7,7 @@ router.get('/yaml', (req, res) => {
         status: 200, 
         workloadName: "mongo",
         applicationType:"Statefulset",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
@@ -19,6 +20,7 @@ router.get('/yaml/mongo-jiva', (req, res) => {
         status: 200, 
         workloadName: "mongo",
         applicationType:"Statefulset",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-mongo.yaml"
  });
@@ -31,6 +33,7 @@ router.get('/yaml/percona-jiva', (req, res) => {
         status: 200,
         workloadName: "percona",
         applicationType:"Deployment",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
         workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-mongo.yaml"
     });
@@ -41,6 +44,7 @@ router.get('/yaml/cockroach-jiva', (req, res) => {
         status: 200,
         workloadName: "cockroach",
         applicationType:"Statefulset",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
         workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-mongo.yaml"
     });
@@ -51,6 +55,7 @@ router.get('/yaml/wordpress-nfs', (req, res) => {
         status: 200, 
         workloadName: "wordpress",
         applicationType:"Deployment",
+        dashboardurl:"https://wordpressjiva.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
@@ -61,6 +66,7 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         status: 200, 
         workloadName: "prometheus",
         applicationType:"Deployment",
+        dashboardurl:"https://prometheus-dashboard.openebs.ci/graph",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/percona-cstor/percona-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/percona-cstor/percona-openebs-deployment.yaml"
  });
@@ -71,6 +77,7 @@ router.get('/yaml/grafana-cstor', (req, res) => {
         workloadName: "grafana",
         openebsEngine:"cstor",
         applicationType:"Deployment",
+        dashboardurl:"https://grafana-dashboard.openebs.ci/",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/4c5c1761d8b710d16d755aece92eb2539eed73d6/production/grafana-cstor/grafana-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/4c5c1761d8b710d16d755aece92eb2539eed73d6/production/grafana-cstor/grafana-cstor-deployment.yaml"
  });
@@ -81,6 +88,7 @@ router.get('/yaml/mongo-cstor', (req, res) => {
         workloadName: "mongo",
         openebsEngine:"cstor",
         applicationType:"Statefulset",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
@@ -91,6 +99,7 @@ router.get('/yaml/percona-cstor', (req, res) => {
         workloadName: "percona",
         openebsEngine:"cstor",
         applicationType:"Deployment",
+        dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
@@ -101,6 +110,7 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         workloadName: "prometheus",
         openebsEngine:"cstor",
         applicationType:"Deployment",
+        dashboardurl:"https://prometheus-dashboard.openebs.ci/graph",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
