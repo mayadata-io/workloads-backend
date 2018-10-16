@@ -54,7 +54,7 @@ router.get('/volume', (req, res) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'namespace': nameSpaces
+            'namespace': req.query.workloadname+'-'+req.query.openebsengine
         }
     };
 
@@ -65,7 +65,7 @@ router.get('/volume', (req, res) => {
             console.log("this is volume erro namespaces ");
         } else {
             data = JSON.parse(body);
-            // console.log(data);
+            console.log(data);
 
             for (i = 0; i < data.items.length; i++) {
                 if (data.items[i].metadata.name.includes(req.query.workloadname) && data.items[i].metadata.name.includes(req.query.openebsengine)){
