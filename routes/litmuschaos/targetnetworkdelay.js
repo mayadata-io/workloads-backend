@@ -4,7 +4,7 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
       "apiVersion": "batch/v1",
       "kind": "Job",
       "metadata": {
-        "generateName": appname + "-openebs-target-network-delay-",
+        "generateName": appnamespace + "-openebs-target-network-delay-",
         "namespace": "litmus"
       },
       "spec": {

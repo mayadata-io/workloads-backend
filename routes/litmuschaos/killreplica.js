@@ -4,7 +4,7 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
       "apiVersion": "batch/v1",
       "kind": "Job",
       "metadata": {
-        "generateName": appname+"-openebs-volume-replica-failure-",
+        "generateName": appnamespace+"-openebs-volume-replica-failure-",
         "namespace": "litmus"
       },
       "spec": {
