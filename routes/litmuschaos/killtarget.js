@@ -55,6 +55,7 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                                     }
                                 ],
                                 "image": "openebs/ansible-runner:ci",
+                                "imagePullPolicy": "Always",
                                 "name": "ansibletest",
                                 "tty": true,
                                 "volumeMounts": [

@@ -21,6 +21,7 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
               {
                 "name": "ansibletest",
                 "image": "openebs/ansible-runner:ci",
+                "imagePullPolicy": "Always",
                 "env": [
                   {
                     "name": "ANSIBLE_STDOUT_CALLBACK",

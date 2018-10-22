@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
   if (appnamespace.includes("cstor")) {
     if (type == "0") {
       r = initJob(
-        killReplica(appname, appnamespace, targetnamespace, volumename)
+        killTarget(appname, appnamespace, targetnamespace, volumename)
       );
     } else if (type == "1") {
       r = initJob(

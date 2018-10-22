@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const cockroachjiva = require('./cockroach-jiva/databasequery');
+const cockroachjiva = require('./cockroachdb-jiva/databasequery');
 const mongojiva = require('./mongo-jiva/databasequery');
 const perconajiva = require('./percona-jiva/databasequery');
 const mongocstor = require('./mongo-cstor/databasequery');
