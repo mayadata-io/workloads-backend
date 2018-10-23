@@ -27,7 +27,9 @@ router.post('/save', (req, res) => {
     }
     //console.log(values);
     mysqlQuery.query(sql+values, function (error, results, fields) {
-        if (error) throw error;
+        if (error){ console.log(error)
+            res.status(500).json({ status: 500, message: "Data is saved" });
+        };
         console.log('The solution is: ', results);
         res.status(200).json({ status: 200, message: "Data is saved" });
     });
@@ -41,7 +43,9 @@ router.post('/save', (req, res) => {
 // get 100 person details whose rNumber = id
 router.get('/read/:id', (req, res) => {
     mysqlQuery.query('SELECT * FROM person where rNumber =' + req.params.id, function (error, results, fields) {
-        if (error) throw error;
+        if (error){ console.log(error)
+            res.status(500).json({ status: 500, message: "Data is read" });
+        };
         console.log('The solution is: ', results);
         res.status(200).json({ status: 200, message: "Data is read" });
     });

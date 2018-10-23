@@ -14,9 +14,9 @@ var connection = new pg.Pool(config);
 
 connection.connect(function (err) {
     if (err) {
-        console.error('error connecting: ' + err.stack);
+        console.error('error connecting: cockroach' + err.stack);
         return;
       }
-      console.log('connected as id ' + connection.threadId);  
+      console.log('connected as id cockroachdb ' + connection.threadId);  
     });       
       

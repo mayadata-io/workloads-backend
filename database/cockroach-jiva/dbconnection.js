@@ -18,10 +18,10 @@ var connection = new pg.Pool(config);
 
 connection.connect(function (err) {
     if (err) {
-        console.error('error connecting: ' + err.stack);
+        console.error('error connecting: cockroach ' + err.stack);
         return;
       }
-      console.log('connected as id ' + connection.threadId);
+      console.log('connected as id cockroach ' + connection.threadId);
 
     
     let createMaya = `create table if not exists person(
@@ -31,7 +31,7 @@ connection.connect(function (err) {
         if (err) {
             console.log(err.message);
         }
-        console.log('table created ..')
+        console.log(' cockroachdb table created ..')
     });
 });
 module.exports = connection;
