@@ -170,11 +170,50 @@ router.get("/litstatus", (req, resp) => {
       }
       resolve(allStatus);
     }).then(allStatus => {
-      console.log(allStatus);
+      // console.log(allStatus);
       resp.status(200).json(allStatus);
     });
   });
 });
+
+
+router.get("/getjob", (req, resp) => {
+  var allStatus = {
+    jobname: String,
+    litmusName: String
+  };
+  var namespaces = req.query.nameSpace;
+
+  k8sApi.listNamespacedPod("litmus").then(res => {
+    return new Promise(function(resolve, reject) {
+      for (i = 0; i < res.body.items.length; i++) {
+     
+        if (
+          res.body.items[i].metadata.name.includes(namespaces)
+           &&
+          res.body.items[i].status.phase == "Pending"
+        ) {
+          allStatus.jobname = res.body.items[i].metadata.labels["job-name"];
+          allStatus.litmusName = res.body.items[i].metadata.labels["litmusname"];
+        } else if (
+            res.body.items[i].metadata.name.includes(namespaces)
+            &&
+          res.body.items[i].status.phase == "Running"
+        ) {
+          allStatus.jobname = res.body.items[i].metadata.labels["job-name"];
+          allStatus.litmusName = res.body.items[i].metadata.labels["litmusname"];
+        }
+      }
+      resolve(allStatus);
+    }).then(allStatus => {
+      // console.log(JSON.stringify(allStatus));
+      resp.status(200).json(allStatus);
+    });
+  });
+});
+
+
+
 
 router.get("/jobstatus", (req, resp) => {
   var allStatus = {

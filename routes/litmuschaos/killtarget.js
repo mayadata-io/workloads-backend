@@ -11,7 +11,8 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                 "template": {
                     "metadata": {
                         "labels": {
-                            "name": "openebs-target-failure"
+                            "name": "openebs-target-failure",
+                            "litmusname": "Kill-OpenEBS-Target"
                         }
                     },
                     "spec": {

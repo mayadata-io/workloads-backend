@@ -11,7 +11,8 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
         "template": {
           "metadata": {
             "labels": {
-              "name": "openebs-target-network-delay"
+              "name": "openebs-target-network-delay",
+              "litmusname": "Increase-Latency-Between-App-and-Replicas"              
             }
           },
           "spec": {
