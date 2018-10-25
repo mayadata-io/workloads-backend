@@ -69,14 +69,26 @@ router.get('/volume', (req, res) => {
 
             for (i = 0; i < data.items.length; i++) {
                 if (data.items[i].metadata.name.includes(req.query.workloadname) && data.items[i].metadata.name.includes(req.query.openebsengine)){
-                    mayaVolume.push({
-                        name: data.items[i].metadata.name,
-                        size: data.items[i].metadata.annotations['openebs.io/volume-size'],
-                        status: data.items[i].metadata.annotations['openebs.io/controller-status'],
-                        replicas: data.items[i].metadata.annotations['vsm.openebs.io/replica-count'],
-                        kind: data.items[i].kind,
-                        castype: data.items[i].spec.casType
-                    });
+           
+                    if(req.query.openebsengine.includes("cstor")){
+                        mayaVolume.push({
+                            name: data.items[i].metadata.name,
+                            size: data.items[i].metadata.annotations['openebs.io/volume-size'],
+                            status: data.items[i].metadata.annotations['openebs.io/controller-status'],
+                            replicas: data.items[i].spec.replicas,
+                            kind: data.items[i].kind,
+                            castype: data.items[i].spec.casType
+                        }); 
+                    }else{
+                        mayaVolume.push({
+                            name: data.items[i].metadata.name,
+                            size: data.items[i].metadata.annotations['openebs.io/volume-size'],
+                            status: data.items[i].metadata.annotations['openebs.io/controller-status'],
+                            replicas: data.items[i].metadata.annotations['vsm.openebs.io/replica-count'],
+                            kind: data.items[i].kind,
+                            castype: data.items[i].spec.casType
+                        });  
+                    }
                 }
             }
         }
