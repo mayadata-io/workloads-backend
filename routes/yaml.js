@@ -112,7 +112,7 @@ router.get('/yaml/redis-jiva', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/openebs/blob/master/k8s/demo/redis/redis-statefulset.yml
+        workloadyaml:"https://github.com/openebs/openebs/blob/master/k8s/demo/redis/redis-statefulset.yml"
  });
 });
 
