@@ -2,13 +2,13 @@ const k8s = require("@kubernetes/client-node");
 const express = require("express");
 const router = express();
 //this is for outside the cluster
-// let kc = new k8s.KubeConfig();
-// kc.loadFromCluster();
-// let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
-// k8sApi.setDefaultAuthentication(kc);
+ let kc = new k8s.KubeConfig();
+ kc.loadFromCluster();
+ let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
+ k8sApi.setDefaultAuthentication(kc);
 
 // this is for inseide the cluster
-var k8sApi = k8s.Config.defaultClient();
+// var k8sApi = k8s.Config.defaultClient();
 // var nameSpaces = `${process.argv[4]}`
 router.get("/sequence", (request, response) => {
   nameSpaces = request.query.appnamespace;
@@ -66,6 +66,14 @@ router.get("/sequence", (request, response) => {
                   res.body.items[i].metadata.labels.type ==
                   "workload"
                 ) {
+                  var dimage = [];
+                  if ( res.body.items[i].metadata.name.includes("redis")
+                  ){                  
+                    dimage.push(res.body.items[i].spec.initContainers[0].image)
+                  }else{
+                    dimage.push(res.body.items[i].spec.containers[0].image)
+                  }
+
                   podDetails.statefulSet.push({
                     kind: res.body.items[i].metadata.ownerReferences[0].kind,
                     name: res.body.items[i].metadata.name,
@@ -76,7 +84,7 @@ router.get("/sequence", (request, response) => {
                         .claimName,
                     status: res.body.items[i].status.phase,
                     nodeName: res.body.items[i].spec.nodeName,
-                    dockerImage:res.body.items[i].spec.containers[0].image,
+                    dockerImage: dimage,
                     node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
                     // adjacency:
                     //   pvcNodeDetails.pvc.find(function(obj) {
@@ -87,6 +95,7 @@ router.get("/sequence", (request, response) => {
                     //     );
                     //   }).volumeName + "-ctrl-"
                   });
+               
                 } else if (
                   res.body.items[i].metadata.ownerReferences[0].kind ==
                   "ReplicaSet"
@@ -131,6 +140,7 @@ router.get("/sequence", (request, response) => {
                       //   }).volumeName + "-rep-"
                     });
                   } else {
+                   
                     podDetails.applicationPod.push({
                       kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
@@ -207,6 +217,7 @@ router.get("/sequence", (request, response) => {
                     res.body.items[i].metadata.labels.type ==
                     "workload"
                   ) {
+                   
                     podDetails.statefulSet.push({
                       kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
