@@ -1,9 +1,9 @@
-const mongoConnection = require("mongoose");
+const mongoConnection = require('mongoose');
 
 // MongoDB URL for database connection
 // const dbHost = "mongodb://127.0.0.1:27017/maya";
 // const dbHost = `${process.argv[2]}/${process.argv[3]}`;
-const dbHost = "mongodb://mongo-0.mongo.mongo-jiva/maya";
+const dbHost = 'mongodb://mongo-0.mongo.mongo-jiva/maya';
 console.log(dbHost);
 const options = {
     autoIndex: false, // Don't build indexes
@@ -17,19 +17,18 @@ const options = {
     family: 4, // Use IPv4, skip trying IPv6
     keepAlive: true,
     keepAliveInitialDelay: 300000,
-    useMongoClient: true
+    useMongoClient: true,
 };
 
-var connectWithRetry = function() {
-    return mongoConnection.connect(dbHost,options, function(err) {
-      if (err) {
-        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
-        setTimeout(connectWithRetry, 5000);
-      }
+var connectWithRetry = function () {
+    return mongoConnection.connect(dbHost, options, (err) => {
+        if (err) {
+            console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+            setTimeout(connectWithRetry, 5000);
+        }
     });
-  };
-  connectWithRetry();
-
+};
+connectWithRetry();
 
 
 module.exports = mongoConnection;

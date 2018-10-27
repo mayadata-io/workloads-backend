@@ -1,7 +1,8 @@
-const k8s = require("@kubernetes/client-node");
-const express = require("express");
+const k8s = require('@kubernetes/client-node');
+const express = require('express');
+
 const router = express();
-//this is for outside the cluster
+// this is for outside the cluster
 // let kc = new k8s.KubeConfig();
 // kc.loadFromCluster();
 // let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
@@ -10,7 +11,7 @@ const router = express();
 // this is for inseide the cluster
 // var k8sApi = k8s.Config.defaultClient();
 
-//list of namespaces
+// list of namespaces
 // router.get("/application", (request, response) => {
 //     k8sApi.listNamespace().then(res => {
 //         var listOfNamespaces = {
@@ -60,7 +61,6 @@ const router = express();
 //         });
 //     });
 // });
-
 
 
 module.exports = router;

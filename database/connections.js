@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
 
 const cockroachjiva = require('./cockroach-jiva/databasequery');
@@ -11,6 +12,5 @@ app.use('/cockroachdb-jiva', cockroachjiva);
 app.use('/mongo-jiva', mongojiva);
 app.use('/percona-jiva', perconajiva);
 app.use('/mongo-cstor', mongocstor);
-app.use('/percona-cstor', perconacstor)
+app.use('/percona-cstor', perconacstor);
 module.exports = app;
-
