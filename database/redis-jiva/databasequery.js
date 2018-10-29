@@ -3,7 +3,7 @@ const express = require('express');
 const router = express();
 
 router.post('/save', (req, res) => {
-    reddis.dbsize( function (err,numkeys) {
+    reddis.dbsize((err,numkeys) => {
     for (i = 0; i < req.body.length; i++) {
       
     let rNumber = i+numkeys;
@@ -11,7 +11,7 @@ router.post('/save', (req, res) => {
     let email = req.body[i].email;
     let age = req.body[i].age;
 
-   reddis.hmset(rNumber, ['name', name, 'email', email, 'age', age],function(err,result){
+   reddis.hmset(rNumber, ['name', name, 'email', email, 'age', age],(err,result) => {
             if(err){
                 console.log(err);
             }else{
@@ -23,11 +23,11 @@ router.post('/save', (req, res) => {
  });   
 });
 
- router.get('/read/:id',function(req,res) {
-    reddis.dbsize( function (err,numkeys) {
+ router.get('/read/:id',(req,res) => {
+    reddis.dbsize((err,numkeys) => {
     for (i = 0; i <numkeys; i++) {
       
-    reddis.hgetall(i ,function(err, data){
+    reddis.hgetall(i ,(err, data) => {
         if(!data){
             console.log('no user exists');
         }else{
