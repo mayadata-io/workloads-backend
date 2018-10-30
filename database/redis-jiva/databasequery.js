@@ -35,16 +35,16 @@ router.post('/save', (req, res) => {
         let val=i;
       
     reddis.hgetall(i,(err, data) => {
-        if(!data){
+       
+        if(err){
             res.status(500).json({ status: 500, message: "Data is not read" });
             console.log('no user exists');
 
         }else{
             if(val==numkeys){
-            console.log(data)
+            console.log("100 user data red in Redis successfully ..!")
             res.status(200).json({ status: 200, message: "Data is read" });
             }
-            else{console.log(data)};
         };
         
     });
