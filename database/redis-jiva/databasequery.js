@@ -12,8 +12,6 @@ router.post('/save', (req, res) => {
     let email = req.body[i].email;
     let age = req.body[i].age;
     let val = i+1;
-        console.log("rnumber  = "+  rNumber);
-        console.log('val = ' + val)
    reddis.hmset(rNumber, ['name', name, 'email', email, 'age', age],(err,result) => {
             if(err){
                 console.log(err);
@@ -21,11 +19,9 @@ router.post('/save', (req, res) => {
 
             }else{
                 if (val==req.body.length) {
-                    console.log(rNumber+'--'+result);
+                    console.log("100 user details is saves successfully..!");
                     res.status(200).json({ status: 200, message: "Data is saved" });
-                }
-                else {console.log(rNumber+'--'+result)};
-                
+                }                
             }
             
       });
