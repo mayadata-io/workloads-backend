@@ -19,7 +19,7 @@ router.post('/save', (req, res) => {
 
             }else{
                 if (val==req.body.length) {
-                    console.log("100 user details is saves successfully..!");
+                    console.log("100 user details is saves successfully in Redis..!");
                     res.status(200).json({ status: 200, message: "Data is saved" });
                 }                
             }
