@@ -17,38 +17,30 @@ router.post('/save', (req, res) => {
                 console.log(err);
                 res.status(500).json({ status: 500, message: "Data is not saved" });
 
-            }else{
-                if (val==req.body.length) {
+            }else if (val==req.body.length) {
                     console.log("100 user details is saves successfully in Redis..!");
                     res.status(200).json({ status: 200, message: "Data is saved" });
                 }                
-            }
-            
-      });
-   };
+    });
+    };
 });   
 });
-
  router.get('/read/:id',(req,res) => {
     reddis.dbsize((err,numkeys) => {
     for (i = 1; i <=numkeys; i++) {
         let val=i;
-      
-    reddis.hgetall(i,(err, data) => {
+       reddis.hgetall(i,(err, data) => {
        
         if(err){
             res.status(500).json({ status: 500, message: "Data is not read" });
             console.log('no user exists');
 
-        }else{
-            if(val==numkeys){
+        }else if(val==numkeys){
             console.log("100 user data red in Redis successfully ..!")
             res.status(200).json({ status: 200, message: "Data is read" });
-            }
-        };
-        
+            
+        }
     });
-   
     };
   });
 }); 

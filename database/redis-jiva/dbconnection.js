@@ -5,6 +5,6 @@ client.on('connect',() => {
 });
 
 client.on('error',(err) => {
-    console.log('Something went wrong ' + err);
+    console.log('Something went wrong with Redis connection ' + err);
 });
 module.exports = client;
