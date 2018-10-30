@@ -6,14 +6,14 @@ router.post('/save', (req, res) => {
     reddis.dbsize((err,numkeys) => {
         let key = numkeys+1;
     for (i = 0; i<req.body.length; i++) {
-
       
     let rNumber = key+i;
     let name = req.body[i].name;
     let email = req.body[i].email;
     let age = req.body[i].age;
     let val = i+1;
-
+        console.log("rnumber  = "+  rNumber);
+        console.log('val = ' + val)
    reddis.hmset(rNumber, ['name', name, 'email', email, 'age', age],(err,result) => {
             if(err){
                 console.log(err);
@@ -21,6 +21,7 @@ router.post('/save', (req, res) => {
 
             }else{
                 if (val==req.body.length) {
+                    console.log(rNumber+'--'+result);
                     res.status(200).json({ status: 200, message: "Data is saved" });
                 }
                 else {console.log(rNumber+'--'+result)};
@@ -44,6 +45,7 @@ router.post('/save', (req, res) => {
 
         }else{
             if(val==numkeys){
+            console.log(data)
             res.status(200).json({ status: 200, message: "Data is read" });
             }
             else{console.log(data)};
