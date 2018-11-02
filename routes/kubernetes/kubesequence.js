@@ -78,6 +78,7 @@ router.get("/sequence", (request, response) => {
                     nodeName: res.body.items[i].spec.nodeName,
                     dockerImage:res.body.items[i].spec.containers[0].image,
                     node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
+                    applabel: res.body.items[i].metadata.labels.app
                     // adjacency:
                     //   pvcNodeDetails.pvc.find(function(obj) {
                     //     return (
@@ -87,6 +88,7 @@ router.get("/sequence", (request, response) => {
                     //     );
                     //   }).volumeName + "-ctrl-"
                   });
+                  
                 } else if (
                   res.body.items[i].metadata.ownerReferences[0].kind ==
                   "ReplicaSet"
@@ -147,6 +149,7 @@ router.get("/sequence", (request, response) => {
 
               resolve(podDetails);
             }).then(podDetails => {
+              console.log(JSON.stringify(podDetails));
               response.status(200).json(podDetails);
             });
           });
@@ -218,7 +221,8 @@ router.get("/sequence", (request, response) => {
                       status: res.body.items[i].status.phase,
                       nodeName: res.body.items[i].spec.nodeName,
                       dockerImage: res.body.items[i].spec.containers[0].image,
-                      node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName]
+                      node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
+                      applabel: res.body.items[i].metadata.labels.app
                     });
                   }
                 }
@@ -252,6 +256,7 @@ router.get("/sequence", (request, response) => {
   
                     resolve(podDetails);
                   }).then(podDetails => {
+                    console.log(JSON.stringify(podDetails));
                     response.status(200).json(podDetails);
                   });
                 });
