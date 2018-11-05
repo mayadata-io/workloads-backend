@@ -1,15 +1,9 @@
 const k8s = require("@kubernetes/client-node");
 const express = require("express");
 const router = express();
-//this is for outside the cluster
-// let kc = new k8s.KubeConfig();
-// kc.loadFromCluster();
-// let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
-// k8sApi.setDefaultAuthentication(kc);
 
-// this is for inseide the cluster
-var k8sApi = k8s.Config.defaultClient();
-// var nameSpaces = `${process.argv[4]}`
+const k8sApi = k8s.Config.defaultClient();
+
 router.get("/sequence", (request, response) => {
   nameSpaces = request.query.appnamespace;
   volumeNameSpaces = request.query.volumenamespace
@@ -54,7 +48,6 @@ router.get("/sequence", (request, response) => {
               pvc: pvcNodeDetails
             };
             return new Promise(function(resolve, reject) {
-              // console.log(JSON.stringify(res.body));
               for (i = 0; i < res.body.items.length; i++) {
                 if (
                   status[res.body.items[i].status.phase] >= overAllStatusCount
@@ -87,14 +80,6 @@ router.get("/sequence", (request, response) => {
                     dockerImage: dimage,
                     node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
                     applabel: res.body.items[i].metadata.labels.app
-                    // adjacency:
-                    //   pvcNodeDetails.pvc.find(function(obj) {
-                    //     return (
-                    //       obj.name ===
-                    //       res.body.items[i].spec.volumes[0]
-                    //         .persistentVolumeClaim.claimName
-                    //     );
-                    //   }).volumeName + "-ctrl-"
                   });
                   
                 } else if (
@@ -104,7 +89,6 @@ router.get("/sequence", (request, response) => {
                   if (
                     res.body.items[i].metadata.name.includes("rep") 
                   ) {
-                    // console.log('name : ' + res.body.items[i].spec.containers[0].image);
                     podDetails.jivaReplica.push({
                       kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
@@ -133,12 +117,6 @@ router.get("/sequence", (request, response) => {
                       status: res.body.items[i].status.phase,
                       openebsjivaversion:
                         res.body.items[i].spec.containers[0].image,
-                      // adjacency:
-                      //   pvcNodeDetails.pvc.find(function(obj) {
-                      //     return (
-                      //       obj.name === res.body.items[i].metadata.labels.pvc
-                      //     );
-                      //   }).volumeName + "-rep-"
                     });
                   } else {
                  
@@ -206,7 +184,6 @@ router.get("/sequence", (request, response) => {
                 pvc: pvcNodeDetails
               };
               return new Promise(function (resolve, reject) {
-                // console.log(JSON.stringify(res.body));
                 for (i = 0; i < res.body.items.length; i++) {
                   if (
                     status[res.body.items[i].status.phase] >= overAllStatusCount
@@ -240,10 +217,7 @@ router.get("/sequence", (request, response) => {
               }).then(podDetails => {
                 k8sApi.listNamespacedPod('openebs').then(re => {
                   return new Promise(function (resolve, reject) {
-                    // console.log(JSON.stringify(re.body));
-  
                     for (i = 0; i < re.body.items.length; i++) {
-                      // console.log(re.body.items[i].metadata.name);
                       if (
                         re.body.items[i].metadata.name.includes(nameSpaces)
                       ) {
@@ -257,15 +231,13 @@ router.get("/sequence", (request, response) => {
                             pvcNodeDetails.nodes[re.body.items[i].spec.nodeName],
                           status: re.body.items[i].status.phase,
                           openebsjivaversion:
-                            re.body.items[i].spec.containers[0].image
-                            
+                            re.body.items[i].spec.containers[0].image                            
                         });
                       }
                     }
   
                     resolve(podDetails);
                   }).then(podDetails => {
-                    console.log(JSON.stringify(podDetails));
                     response.status(200).json(podDetails);
                   });
                 });
