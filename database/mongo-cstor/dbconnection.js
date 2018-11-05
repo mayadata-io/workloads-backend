@@ -23,11 +23,8 @@ const options = {
 var connectWithRetry = function() {
     return mongoConnection.connect(dbHost,options, function(err) {
       if (err) {
-        console.error('Failed to connect to mongo-cstor on startup - retrying in 5 sec', err);
+        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
         setTimeout(connectWithRetry, 5000);
-      }
-      else{
-        console.log("connection establish in mongo-cstor")
       }
     });
   };

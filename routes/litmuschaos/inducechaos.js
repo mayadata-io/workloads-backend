@@ -15,12 +15,12 @@ function initJob(app) {
 
 async function createJob(deploymentManifest, config, Client) {
   try {
-    // const client = new Client({ config: config.getInCluster() });
-    // await client.loadSpec();
-    const client = new Client({
-      config: config.fromKubeconfig(),
-      version: "1.9"
-    });
+    const client = new Client({ config: config.getInCluster() });
+    await client.loadSpec();
+    // const client = new Client({
+    //   config: config.fromKubeconfig(),
+    //   version: "1.9"
+    // });
 
     const create = await client.apis.batch.v1
       .namespaces("litmus")
@@ -83,13 +83,13 @@ router.get("/", (req, resp) => {
   }
 });
 
-// let kc = new k8s.KubeConfig();
-// kc.loadFromCluster();
-// let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
-// k8sApi.setDefaultAuthentication(kc);
+let kc = new k8s.KubeConfig();
+kc.loadFromCluster();
+let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
+k8sApi.setDefaultAuthentication(kc);
 
 // this is for inseide the cluster
-var k8sApi = k8s.Config.defaultClient();
+// var k8sApi = k8s.Config.defaultClient();
 
 router.get("/litmusstatus", (req, resp) => {
   var allStatus = {

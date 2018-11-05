@@ -4,7 +4,7 @@ var pg = require('pg');
 // Connect to the "bank" database.
 var config = {
     user: 'root',
-    host: 'cockroachdb.cockroachdb-jiva',
+    host: 'cockroachdb.cockroach-jiva',
 //    database: 'maya',
     port: 26257
 };
@@ -14,9 +14,9 @@ var connection = new pg.Pool(config);
 
 connection.connect(function (err) {
     if (err) {
-        console.error('error in connecting cockroachdb-jiva: ' + err.stack);
+        console.error('error connecting: cockroach' + err.stack);
         return;
       }
-      console.log('cockroachdb-jiva connected as id' + connection.threadId);  
+      console.log('connected as id cockroachdb ' + connection.threadId);  
     });       
       
