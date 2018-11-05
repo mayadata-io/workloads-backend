@@ -25,7 +25,6 @@ async function createJob(deploymentManifest, config, Client) {
     const create = await client.apis.batch.v1
       .namespaces("litmus")
       .jobs.post({ body: deploymentManifest });
-    // console.log("Result: ", create);
     return create;
   } catch (err) {
     console.error("Error: ", err);
@@ -33,8 +32,6 @@ async function createJob(deploymentManifest, config, Client) {
 }
 
 router.get("/", (req, resp) => {
-  // var app = req.query.app;
-
   var type = req.query.type;
   var appnamespace = req.query.appnamespace;
   var targetnamespace = req.query.targetnamespace;
@@ -83,13 +80,7 @@ router.get("/", (req, resp) => {
   }
 });
 
-// let kc = new k8s.KubeConfig();
-// kc.loadFromCluster();
-// let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
-// k8sApi.setDefaultAuthentication(kc);
-
-// this is for inseide the cluster
-var k8sApi = k8s.Config.defaultClient();
+const k8sApi = k8s.Config.defaultClient();
 
 router.get("/litmusstatus", (req, resp) => {
   var allStatus = {
