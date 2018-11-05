@@ -6,7 +6,7 @@ const createDb = require('./databasecreatedb');
 
 var config = {
     user: 'root',
-    host: 'cockroachdb-public.cockroachdb-jiva' ,
+    host: 'cockroachdb.cockroachdb-jiva' ,
     database: 'maya',
     port: 26257
 };

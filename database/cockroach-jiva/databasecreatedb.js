@@ -1,10 +1,10 @@
 const async = require('async');
 const fs = require('fs');
 const pg = require('pg');
-
+// Connect to the "bank" database.
 var config = {
     user: 'root',
-    host: 'cockroachdb-public.cockroach-jiva',
+    host: 'cockroachdb.cockroach-jiva',
     port: 26257
 };
 
@@ -17,15 +17,14 @@ connection.connect(function (err) {
         return;
       } else {
         console.log('cockroachdb-jiva connected as id' + connection.threadId);
+        return;
       } 
     });  
-    connection.query(' cockroachdb-jiva  create database maya', function (err, results, fields) {
-      if (err) {
-          console.log('cockroachdb-jiva  Db not created ' +err.message);
-          return;
-      }else{
-        console.log('ckroachdb-jiva Db created ..')
-        }
+    connection.query('create database maya', function (err, results, fields) {
+          if (err) {
+              console.log('Db not created ' +err.message);
+          }
+          else{console.log('Db created ..')}
   });  
     
 
