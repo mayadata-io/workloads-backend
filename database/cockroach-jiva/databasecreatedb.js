@@ -5,8 +5,8 @@ const pg = require('pg');
 var config = {
     user: 'root',
     host: 'cockroachdb.cockroach-jiva',
-    port: 26257,
-    sslmode:disable
+//    database: 'maya',
+    port: 26257
 };
 
 // Create a pool.
