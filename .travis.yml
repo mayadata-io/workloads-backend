@@ -13,4 +13,7 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then 
    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push inyee/dashboard-backend:$TRAVIS_BRANCH-$COMMIT ;
   fi
+- if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then 
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push inyee/staging-dashboard-backend:$TRAVIS_BRANCH-$COMMIT ;
+  fi  
 
