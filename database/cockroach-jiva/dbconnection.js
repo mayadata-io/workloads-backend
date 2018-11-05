@@ -17,7 +17,6 @@ var connection = new pg.Pool(config);
 connection.connect(function(err) {
   if (err) {
     console.error("error connecting cockroach " + err.stack);
-    return;
   } else {
     console.log("cockroach connected as id  " + connection.threadId);
   }
@@ -28,8 +27,9 @@ connection.connect(function(err) {
   connection.query(createMaya, function(err, results, fields) {
     if (err) {
       console.log("cockroachdb table is not created " + err.message);
+    } else {
+      console.log(" cockroachdb table created ..");
     }
-    console.log(" cockroachdb table created ..");
   });
 });
 module.exports = connection;
