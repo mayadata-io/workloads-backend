@@ -5,6 +5,7 @@ const pg = require('pg');
 var config = {
     user: 'root',
     host: 'cockroachdb.cockroach-jiva',
+//    database: 'maya',
     port: 26257
 };
 
