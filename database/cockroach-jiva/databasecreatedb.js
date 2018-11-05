@@ -10,7 +10,7 @@ var config = {
 
 // Create a pool.
 var connection = new pg.Pool(config);
-
+ 
 connection.connect(function (err) {
     if (err) {
         console.error('error in connecting cockroachdb-jiva: ' + err.stack);
