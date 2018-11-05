@@ -8,7 +8,7 @@ var pg = require('pg');
 let createMaya = `create table if not exists person(rNumber INT, name STRING,email STRING, age INT)`;
 mysqlQuery.query(createMaya, function (err, results, fields) {
     if (err) {
-        console.log(err.message);
+        console.log("cockroachdb-jiva : " + err.message);
     }
 });
 
