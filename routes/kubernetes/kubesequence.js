@@ -2,13 +2,13 @@ const k8s = require("@kubernetes/client-node");
 const express = require("express");
 const router = express();
 //this is for outside the cluster
-let kc = new k8s.KubeConfig();
-kc.loadFromCluster();
-let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
-k8sApi.setDefaultAuthentication(kc);
+// let kc = new k8s.KubeConfig();
+// kc.loadFromCluster();
+// let k8sApi = new k8s.Core_v1Api(kc.getCurrentCluster()["server"]);
+// k8sApi.setDefaultAuthentication(kc);
 
 // this is for inseide the cluster
-// var k8sApi = k8s.Config.defaultClient();
+var k8sApi = k8s.Config.defaultClient();
 // var nameSpaces = `${process.argv[4]}`
 router.get("/sequence", (request, response) => {
   nameSpaces = request.query.appnamespace;
@@ -86,6 +86,7 @@ router.get("/sequence", (request, response) => {
                     nodeName: res.body.items[i].spec.nodeName,
                     dockerImage: dimage,
                     node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
+                    applabel: res.body.items[i].metadata.labels.app
                     // adjacency:
                     //   pvcNodeDetails.pvc.find(function(obj) {
                     //     return (
@@ -229,7 +230,8 @@ router.get("/sequence", (request, response) => {
                       status: res.body.items[i].status.phase,
                       nodeName: res.body.items[i].spec.nodeName,
                       dockerImage: res.body.items[i].spec.containers[0].image,
-                      node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName]
+                      node: pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
+                      applabel: res.body.items[i].metadata.labels.app
                     });
                   }
                 }
@@ -263,6 +265,7 @@ router.get("/sequence", (request, response) => {
   
                     resolve(podDetails);
                   }).then(podDetails => {
+                    console.log(JSON.stringify(podDetails));
                     response.status(200).json(podDetails);
                   });
                 });
