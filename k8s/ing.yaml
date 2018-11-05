@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- name: mongo-frontend-ingress
+ name: staging-workload-frontend-ingress
  namespace: staging-workload
  annotations:
   nginx.ingress.kubernetes.io/rewrite-target: /

@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: staging-workload-backend
   namespace: staging-workload
+  annotations:
+    flux.weave.works/automated: "true"   
 spec:
   selector:
     matchLabels:
@@ -17,7 +19,7 @@ spec:
       - name: staging-workload-backend-container
         ports:
         - containerPort: 3000
-        image: inyee/staging-workload-backend:master-30ffbf7
+        image: inyee/staging-dashboard-backend:2a74fa4
         imagePullPolicy: Always
 ---
 apiVersion: v1
