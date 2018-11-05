@@ -15,18 +15,18 @@ pool.connect(function(err, client, done) {
     console.log("error in connecting  postgresql: " + err);
   } else {
     console.log("connected to postgresql");
+    pool.query(
+      "CREATE TABLE IF NOT EXISTS person(rNumber INT, name VARCHAR,email VARCHAR, age INT)",
+      (err, result) => {
+        if (err) {
+          console.log("postgresql Table not created " + err);
+        } else {
+          console.log("postgresql table created.. ");
+        }
+      }
+    );
   }
 });
 
-pool.query(
-  "CREATE TABLE IF NOT EXISTS person(rNumber INT, name VARCHAR,email VARCHAR, age INT)",
-  (err, result) => {
-    if (err) {
-      console.log("Table not created " + err);
-    } else {
-      console.log("table created.. ");
-    }
-  }
-);
 
 module.exports = pool;
