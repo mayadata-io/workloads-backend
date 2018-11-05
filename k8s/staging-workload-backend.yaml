@@ -21,7 +21,7 @@ spec:
         - containerPort: 3000
         image: inyee/staging-dashboard-backend:2a74fa4
         imagePullPolicy: Always
----
+--- 
 apiVersion: v1
 kind: Service
 metadata:

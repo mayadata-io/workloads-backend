@@ -1,11 +1,10 @@
-var async = require('async');
-var fs = require('fs');
-var pg = require('pg');
+const async = require('async');
+const fs = require('fs');
+const pg = require('pg');
 
 var config = {
     user: 'root',
-    host: 'cockroachdb.cockroachdb-jiva',
-    database: 'maya',
+    host: 'cockroachdb-public.cockroach-jiva',
     port: 26257
 };
 
@@ -16,7 +15,18 @@ connection.connect(function (err) {
     if (err) {
         console.error('error in connecting cockroachdb-jiva: ' + err.stack);
         return;
-      }
-      console.log('cockroachdb-jiva connected as id' + connection.threadId);  
-    });       
+      } else {
+        console.log('cockroachdb-jiva connected as id' + connection.threadId);
+      } 
+    });  
+    connection.query(' cockroachdb-jiva  create database maya', function (err, results, fields) {
+      if (err) {
+          console.log('cockroachdb-jiva  Db not created ' +err.message);
+          return;
+      }else{
+        console.log('ckroachdb-jiva Db created ..')
+        }
+  });  
+    
+
       

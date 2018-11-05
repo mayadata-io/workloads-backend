@@ -125,16 +125,5 @@ router.get('/yaml/postgresql-jiva', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/postgresql-jiva/postgresql-statefulset.yml"
  });
 });
-router.get('/yaml/postgresql-jiva', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "postgresql",
-        applicationType:"Statefulset",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production"
- });
-});
-
 
 module.exports = router;
