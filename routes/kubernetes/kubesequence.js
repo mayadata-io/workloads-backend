@@ -83,10 +83,6 @@ router.get("/sequence", (request, response) => {
                   });
                   
                 } else if (
-                  res.body.items[i].metadata.ownerReferences[0].kind ==
-                  "ReplicaSet"
-                ) {
-                  if (
                     res.body.items[i].metadata.name.includes("rep") 
                   ) {
                     podDetails.jivaReplica.push({
@@ -118,22 +114,8 @@ router.get("/sequence", (request, response) => {
                       openebsjivaversion:
                         res.body.items[i].spec.containers[0].image,
                     });
-                  } else {
-                 
-                    podDetails.applicationPod.push({
-                      kind: res.body.items[i].metadata.ownerReferences[0].kind,
-                      name: res.body.items[i].metadata.name,
-                      namespace: res.body.items[i].metadata.namespace,
-                      nodeName: res.body.items[i].spec.nodeName,
-                      node:
-                        pvcNodeDetails.nodes[res.body.items[i].spec.nodeName],
-                      status: res.body.items[i].status.phase,
-                      dockerImage: res.body.items[i].spec.containers[0].image
-                    });
-                  }
-                }
+                  }                
               }
-
               resolve(podDetails);
             }).then(podDetails => {
               response.status(200).json(podDetails);
@@ -143,7 +125,7 @@ router.get("/sequence", (request, response) => {
       });
     });
   });}
-  else if(nameSpaces.includes("cstor") || !nameSpaces.includes("cock")){
+  else if(nameSpaces.includes("cstor")){
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
