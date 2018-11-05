@@ -6,11 +6,13 @@ env:
 services:
   - docker
 script:
-  - docker build -t inyee/dashboard-backend:$TRAVIS_BRANCH-$COMMIT .
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
 after_success:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then 
-   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push inyee/dashboard-backend:$TRAVIS_BRANCH-$COMMIT ;
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/dashboard-backend;
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
   fi
+- if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/staging-dashboard-backend;
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"&& docker build -t $REPO:$COMMIT . && docker push $REPO; 
+  fi  
 

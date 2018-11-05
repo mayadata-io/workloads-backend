@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: staging-workload-backend
+  namespace: staging-workload
+spec:
+  selector:
+    matchLabels:
+      app: staging-workload-backend
+  template:
+    metadata:
+      labels:
+        app: staging-workload-backend
+    spec:
+      serviceAccountName: staging-workload-operator
+      containers:
+      - name: staging-workload-backend-container
+        ports:
+        - containerPort: 3000
+        image: inyee/staging-workload-backend:master-30ffbf7
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: staging-workload
+  labels:
+    app: staging-workload-backend
+  name: staging-workload-backend-service
+spec:
+  type: NodePort
+  ports:
+  - name: staging-workload-backend
+    port: 3000
+    protocol: TCP
+  selector:
+    app: staging-workload-backend
