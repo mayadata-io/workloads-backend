@@ -4,7 +4,7 @@ const pg = require('pg');
 // Connect to the "bank" database.
 var config = {
     user: 'root',
-    host: 'cockroachdb.cockroach-jiva',
+    host: 'cockroachdb.cockroachdb-jiva',
 //    database: 'maya',
     port: 26257
 };
@@ -21,11 +21,11 @@ connection.connect(function (err) {
         return;
       } 
     });  
-connection.query('create database maya', function (err, results, fields) {
-      if (err) {
-          console.log('Db not created ' +err.message);
-      }
-      else{console.log('Db created ..')}
+    connection.query('create database maya', function (err, results, fields) {
+          if (err) {
+              console.log('Db not created ' +err.message);
+          }
+          else{console.log('Db created ..')}
   });  
     
 

@@ -23,6 +23,7 @@ router.post('/save', (req, res) => {
             values = values + `( ${req.body[i].rNumber}, '${req.body[i].name}', '${req.body[i].email}' , ${req.body[i].age}),`
         }
     }
+    //console.log(values);
     mysqlQuery.query(sql+values, function (error, results, fields) {
         if (error){ 
             console.log('this is cockroadb erro :'+ error)	    
