@@ -4,8 +4,7 @@ const pg = require('pg');
 // Connect to the "bank" database.
 var config = {
     user: 'root',
-    host: 'cockroachdb.cockroachdb-jiva',
-//    database: 'maya',
+    host: 'cockroachdb.cockroach-jiva',
     port: 26257
 };
 
