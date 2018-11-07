@@ -16,7 +16,7 @@ connection.connect(function (err) {
     if (err) {
         console.error("error connecting cockroach " + err);
       } else {
-        console.log("cockroach connected as id  " + connection);
+        console.log("cockroach connected as id  " + JSON.stringify( connection));
       }
     });
     
