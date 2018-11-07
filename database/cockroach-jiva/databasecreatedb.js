@@ -5,7 +5,8 @@ const pg = require('pg');
 var config = {
     user: 'root',
     host: 'cockroachdb.cockroach-jiva',
-    port: 26257
+    port: 26257,
+    sslmode:disable
 };
 
 // Create a pool.
@@ -22,9 +23,9 @@ connection.connect(function (err) {
     });  
     connection.query('create database maya', function (err, results, fields) {
           if (err) {
-              console.log('Db not created ' +err.message);
+              console.log('Db not created cockroachdb-jiva' +err.message);
           }
-          else{console.log('Db created ..')}
+          else{console.log('cockroachdb-jiva Db created ..')}
   });  
     
 
