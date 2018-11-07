@@ -6,10 +6,9 @@ const createDb = require('./databasecreatedb');
 
 var config = {
     user: 'root',
-    host: 'cockroachdb.cockroachdb-jiva' ,
+    host: 'cockroachdb-public.cockroachdb-jiva' ,
     database: 'maya',
-    port: 26257,
-    sslmode:disable
+    port: 26257
 };
 var connection = new pg.Pool(config);
 
