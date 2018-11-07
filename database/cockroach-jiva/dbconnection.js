@@ -8,7 +8,8 @@ var config = {
     user: 'root',
     host: 'cockroachdb.cockroachdb-jiva' ,
     database: 'maya',
-    port: 26257
+    port: 26257,
+    sslmode:disable
 };
 var connection = new pg.Pool(config);
 
