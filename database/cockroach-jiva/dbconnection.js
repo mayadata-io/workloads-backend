@@ -1,35 +1,37 @@
-var async = require("async");
-var fs = require("fs");
-var pg = require("pg");
-
-const createDb = require("./databasecreatedb");
-
-var config = {
-  user: "root",
-  host: "cockroachdb.cockroachdb-jiva",
-  database: "maya",
-  port: 26257
+const async = require('async');
+const fs = require('fs');
+const pg = require('pg');
+const config = {
+    user: 'root',
+    host: 'cockroachdb-public.cockroachdb-jiva',
+    port: 26257
 };
 
 // Create a pool.
-var connection = new pg.Pool(config);
+const pool = new pg.Pool(config);
 
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting cockroach " + err.stack);
-  } else {
-    console.log("cockroach connected as id  " + connection.threadId);
-  }
-
-  let createMaya = `create table if not exists person(
-        rNumber INT, name VARCHAR,email VARCHAR, age INT
-    )`;
-  connection.query(createMaya, function(err, results, fields) {
+pool.connect((err, client, done) => {
     if (err) {
-      console.log("cockroachdb table is not created " + err.message);
-    } else {
-      console.log(" cockroachdb table created ..");
+        console.error('could not connect to cockroachdb', err);
     }
-  });
+    console.log('connected to CockroachDB ');
+    async.waterfall([
+            (next) => {
+                // Create the 'maya' Database.
+                client.query('create database if not exists maya;', next);
+            },
+            (results, next) => {
+                // Creating  'person' table.
+                client.query('create table if not exists maya.person(rNumber INT, name VARCHAR,email VARCHAR, age INT);', next);
+            },
+        ],
+        (err, results) => {
+            if (err) {
+                console.error('Error in Creating DB/Table in CockroachDb: ', err);
+            }
+            else{
+
+            console.log('Successfully Created DB & Table in CockroachDb');}
+            });
 });
-module.exports = connection;
+module.exports = pool;
