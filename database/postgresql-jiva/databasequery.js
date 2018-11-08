@@ -3,8 +3,8 @@ const express = require('express');
 const router = express();
 
 router.post('/save', (req, res) => {
-    var pquery = "INSERT INTO person (rNumber, name, email, age) VALUES ";
-    var values = "";
+    const pquery = 'INSERT INTO person (rNumber, name, email, age) VALUES ';
+    const values = "";
     for (i = 0; i < req.body.length; i++) {
         if (i == req.body.length-1) {
             values = values + `( ${req.body[i].rNumber},' ${req.body[i].name}', '${req.body[i].email}', ${req.body[i].age})`
@@ -13,7 +13,7 @@ router.post('/save', (req, res) => {
             values = values + `( ${req.body[i].rNumber}, '${req.body[i].name}', '${req.body[i].email}' , ${req.body[i].age}),`
         }
     }
-    pgsql.query(pquery+values, function (error, results, fields) {
+    pgsql.query(pquery+values,(error, results, fields) => {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.status(200).json({ status: 200, message: "Data is saved" });
@@ -21,7 +21,7 @@ router.post('/save', (req, res) => {
 });
 
 router.get('/read/:id', (req, res) => {
-    pgsql.query('SELECT * FROM person where rNumber =' + req.params.id, function (error, results, fields) {
+    pgsql.query('SELECT * FROM person where rNumber =' + req.params.id,(error, results, fields) => {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.status(200).json({ status: 200, message: "Data is read" });
