@@ -18,7 +18,7 @@ router.get("/volume", (req, res) => {
       console.log("this is volume erro namespaces ");
     } else {
       data = JSON.parse(body);
-
+     console.log(data);
       for (i = 0; i < data.items.length; i++) {
         if (
           data.items[i].metadata.name.includes(req.query.workloadname) &&
