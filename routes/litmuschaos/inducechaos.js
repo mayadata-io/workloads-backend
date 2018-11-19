@@ -3,6 +3,7 @@ const router = express();
 const killTarget = require("./killtarget");
 const killReplica = require("./killreplica");
 const networkDelay = require("./targetnetworkdelay");
+const cStorPoolFailure = require('./cstorpoolfailure');
 const k8s = require("@kubernetes/client-node");
 
 const Client = require("kubernetes-client").Client;
@@ -17,9 +18,9 @@ async function createJob(deploymentManifest, config, Client) {
   try {
      const client = new Client({ config: config.getInCluster() });
      await client.loadSpec();
-   // const client = new Client({
-    //  config: config.fromKubeconfig(),
-   //   version: "1.9"
+  //  const client = new Client({
+  //    config: config.fromKubeconfig(),
+  //    version: "1.9"
   //  });
 
     const create = await client.apis.batch.v1
@@ -49,6 +50,13 @@ router.get("/", (req, resp) => {
     } else if (type == "1") {
       r = initJob(
         networkDelay(appname, appnamespace, targetnamespace, volumename)
+      ).then(res => {
+        console.log(res.body);
+        resp.status(200).json(res.body.metadata.name);
+      });
+    }else if(type == "2"){
+      r = initJob(
+        cStorPoolFailure(appname, appnamespace, targetnamespace, volumename)
       ).then(res => {
         console.log(res.body);
         resp.status(200).json(res.body.metadata.name);
