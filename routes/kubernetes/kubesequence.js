@@ -201,8 +201,10 @@ router.get("/sequence", (request, response) => {
                   return new Promise(function (resolve, reject) {
                     for (i = 0; i < re.body.items.length; i++) {
                       if (
-                        re.body.items[i].metadata.name.includes(nameSpaces)
+                        typeof re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'] !== 'undefined' &&
+                        re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'].includes(nameSpaces)                      
                       ) {
+
                         podDetails.jivaController.push({
                           kind: re.body.items[i].metadata.ownerReferences[0].kind,
                           name: re.body.items[i].metadata.name,
