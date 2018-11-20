@@ -12,10 +12,10 @@ const pool = new pg.Pool(config);
 
 pool.connect((err, client, done) => {
     if (err) {
-        console.error('could not connect to cockroachdb', err);
-    }
-    console.log('connected to CockroachDB ');
-    async.waterfall([
+        console.error('could not connect to cockroachdb-cstor', err);
+    }else{
+        console.log('connected to CockroachDB cstor');
+        async.waterfall([
             (next) => {
                 // Create the 'maya' Database.
                 client.query('create database if not exists maya;', next);
@@ -27,11 +27,14 @@ pool.connect((err, client, done) => {
         ],
         (err, results) => {
             if (err) {
-                console.error('Error in Creating DB/Table in CockroachDb: ', err);
+                console.error('Error in Creating DB/Table in CockroachDb cstor : ', err);
             }
             else{
 
-            console.log('Successfully Created DB & Table in CockroachDb');}
+            console.log('Successfully Created DB & Table in CockroachDb cstor');}
             });
+    }
+
+
 });
 module.exports = pool;

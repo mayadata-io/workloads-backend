@@ -10,6 +10,8 @@ let createMaya = `create table if not exists person(
 mysqlQuery.query(createMaya, function (err, results, fields) {
     if (err) {
         console.log(err.message);
+    }else{
+        console.log("table is create in percona-cstor")
     }
 });
 
@@ -37,13 +39,5 @@ router.get('/read/:id', (req, res) => {
     });
 });
 
-// sample apli to test node server
-router.get("/users/ali", (req, res) => {
-    User.find({}, (err, users) => {
-        if (err) res.status(500).send(error);
-        console.log("this is user api");
-        res.status(200).json({ name: "ali", age: "20" });
-    });
-});
 
 module.exports = router;
