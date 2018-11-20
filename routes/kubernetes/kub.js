@@ -1,10 +1,10 @@
-const k8s = require("@kubernetes/client-node");
-const express = require("express");
+const k8s = require('@kubernetes/client-node');
+const express = require('express');
 const router = express();
 
 const k8sApi = k8s.Config.defaultClient();
 
-router.get("/status", (req, resp) => {
+router.get('/status', (req, resp) => {
   var overAllStatus = "";
   var overAllStatusCount = 0;
   var status = {
@@ -38,7 +38,7 @@ router.get("/status", (req, resp) => {
   });
 });
 
-router.get("/applications", (request, response) => {
+router.get('/applications', (request, response) => {
   k8sApi.listNamespace().then(res => {
     var listOfNamespaces = {
       jiva: [],
@@ -46,17 +46,18 @@ router.get("/applications", (request, response) => {
     };
     return new Promise(function (resolve, reject) {
       for (i = 0; i < res.body.items.length; i++) {
-        var workloadName = res.body.items[i].metadata.name.split("-")[0];
-        var openebsStorgaeEngine = res.body.items[i].metadata.name.split("-")[1];
-        if (res.body.items[i].metadata.name.includes("cstor")) {
+        let workloadName = res.body.items[i].metadata.name.split('-')[0];
+        if (res.body.items[i].metadata.name.includes('cstor') || res.body.items[i].metadata.name.includes('logging')) {
           listOfNamespaces.cstor.push({
             workloadName: workloadName,
-            engine: openebsStorgaeEngine
+            engine: 'cStor',
+            namespace:res.body.items[i].metadata.name
           })
-        } else if (res.body.items[i].metadata.name.includes("jiva")) {
+        } else if (res.body.items[i].metadata.name.includes('jiva') || res.body.items[i].metadata.name.includes('wordpress')) {
           listOfNamespaces.jiva.push({
             workloadName: workloadName,
-            engine: openebsStorgaeEngine
+            engine: 'Jiva',
+            namespace:res.body.items[i].metadata.name
           })
         }
       }

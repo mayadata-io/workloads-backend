@@ -13,7 +13,17 @@ router.get('/yaml/mongo-jiva', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/mongo-jiva/mongo-jiva-mongo.yaml"
  });
 });
-
+router.get('/yaml/mongo-cstor', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "mongo",
+        openebsEngine:"cStor",
+        applicationType:"Statefulset",
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/mongo-cstor/mongo-cstor-mongo.yaml"
+ });
+});
 router.get('/yaml/percona-jiva', (req, res) => {
     res.status(200).json({
         status: 200,
@@ -25,7 +35,17 @@ router.get('/yaml/percona-jiva', (req, res) => {
         workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-jiva/percona-openebs-deployment.yaml"
     });
 });
-
+router.get('/yaml/percona-cstor', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "percona",
+        openebsEngine:"cStor",
+        applicationType:"Deployment",
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
+ });
+});
 router.get('/yaml/cockroachdb-jiva', (req, res) => {
     res.status(200).json({
         status: 200,
@@ -74,29 +94,20 @@ router.get('/yaml/grafana-cstor', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/grafana-cstor/grafana-cstor-deployment.yaml"
  });
 });
-router.get('/yaml/mongo-cstor', (req, res) => {
+
+
+router.get('/yaml/prometheus-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "mongo",
-        openebsEngine:"cStor",
-        applicationType:"Statefulset",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/mongo-cstor/mongo-cstor-mongo.yaml"
- });
-});
-router.get('/yaml/percona-cstor', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "percona",
+        workloadName: "prometheus",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"",
+        dashboardurl:"https://prometheus-dashboard.openebs.ci/graph",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
 });
-router.get('/yaml/prometheus-cstor', (req, res) => {
+router.get('/yaml/prometheus-jiva', (req, res) => {
     res.status(200).json({ 
         status: 200, 
         workloadName: "prometheus",
@@ -119,6 +130,18 @@ router.get('/yaml/redis-cstor', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/redis-cstor/redis-statefulset.yaml"
  });
 });
+
+router.get('/yaml/redis-jiva', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "redis",
+        openebsEngine:"cStor",
+        applicationType:"Statefulset",
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/redis-cstor/redis-statefulset.yaml"
+ });
+});
 router.get('/yaml/postgresql-jiva', (req, res) => {
     res.status(200).json({ 
         status: 200, 
@@ -126,6 +149,29 @@ router.get('/yaml/postgresql-jiva', (req, res) => {
         openebsEngine:"Jiva",
         applicationType:"Statefulset",
         dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
+ });
+});
+router.get('/yaml/postgresql-cstor', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "postgresql",
+        openebsEngine:"Jiva",
+        applicationType:"Statefulset",
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
+ });
+});
+
+router.get('/yaml/logging', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "elasticsearch",
+        openebsEngine:"cStor",
+        applicationType:"Statefulset",
+        dashboardurl:"e2elogs.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
  });

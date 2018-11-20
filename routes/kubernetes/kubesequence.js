@@ -125,7 +125,7 @@ router.get("/sequence", (request, response) => {
       });
     });
   });}
-  else if(nameSpaces.includes("cstor")){
+  else if(nameSpaces.includes("cstor")||nameSpaces.includes("logging") ){
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
