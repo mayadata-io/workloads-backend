@@ -3,7 +3,7 @@ const express = require('express');
 const router = express();
 
 router.post('/save', (req, res) => {
-    let sql = 'INSERT INTO person (rNumber, name, email, age) VALUES ';
+    let sql = 'INSERT INTO maya.person (rNumber, name, email, age) VALUES ';
     let values = '';
     for (i = 0; i < req.body.length; i++) {
         if (i == req.body.length-1) {
@@ -27,7 +27,7 @@ router.post('/save', (req, res) => {
 
 // get 100 person details whose rNumber = id
 router.get('/read/:id', (req, res) => {
-    ckrhQuery.query('SELECT * FROM person where rNumber =' + req.params.id,(error, results, fields) => {
+    ckrhQuery.query('SELECT * FROM maya.person where rNumber =' + req.params.id,(error, results, fields) => {
     if (error){ console.log('this is cockroadb erro :'+ error)
         res.status(500).json({ status: 500, message: 'Data is read' });
     }else{

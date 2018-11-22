@@ -1,6 +1,6 @@
 
 var mysql = require('mysql');
-const createDb = require('./databasecreatedb');
+// const createDb = require('./databasecreatedb');
 
 var connection = mysql.createConnection({
   host     : 'percona-mysql.percona-cstor',
@@ -13,9 +13,11 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) {
     console.error('error in connecting percona-cstor: ' + err.stack);
-    return;
+    
+  }else{
+    console.log('percona-cstor connected as id ' + connection.threadId);
   }
-  console.log('percona-cstor connected as id ' + connection.threadId);
+ 
 });
 
 module.exports = connection;

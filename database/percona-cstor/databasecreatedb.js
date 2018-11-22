@@ -11,7 +11,7 @@ var connectWithRetry = function () {
  return connection.connect(function (err) {
     if (err) {
       console.error('error in connecting percona-cstor: ' + err.stack);
-      setTimeout(connectWithRetry, 5000);
+      // setTimeout(connectWithRetry, 5000);
       return;  
     }
     connection.query("CREATE DATABASE if not exists maya", function (err, result) {

@@ -23,9 +23,15 @@ router.post('/save', (req, res) => {
         values.push([req.body[i].rNumber, req.body[i].name, req.body[i].email, req.body[i].age]);
     }
     mysqlQuery.query(sql, [values], function (error, results, fields) {
-        if (error) throw error;
-        console.log('The solution is: ', results);
-        res.status(200).json({ status: 200, message: "Data is saved" });
+        if (error) {
+            console.log('percona-cstor insert error: ' +error  );
+            res.status(500).json({ status: 500, message: "Data is not saved" });
+        }
+        else{
+            console.log('percona-cstor The solution is: ', results);
+            res.status(200).json({ status: 200, message: "Data is saved" });
+        }
+        
     });
 
 });
@@ -33,10 +39,15 @@ router.post('/save', (req, res) => {
 // get 100 person details whose rNumber = id
 router.get('/read/:id', (req, res) => {
     mysqlQuery.query('SELECT * FROM person where rNumber =' + req.params.id, function (error, results, fields) {
-        if (error) throw error;
-        console.log('The solution is: ', results);
-        res.status(200).json({ status: 200, message: "Data is read" });
-    });
+        if (error) {
+            console.log('percona-cstor insert error: ' +error  );
+            res.status(500).json({ status: 500, message: "Data is not Read" });
+        }
+        else{
+            console.log('percona-cstor The solution is: ', results);
+            res.status(200).json({ status: 200, message: "Data is Read" });
+        }
+});
 });
 
 

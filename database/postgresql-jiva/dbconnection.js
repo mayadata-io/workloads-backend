@@ -5,7 +5,7 @@ const config = {
   user: 'testuser',
   database: 'userdb',
   password: 'password',
-  host: 'pgset.postgresql-jiva',
+  host: 'pgset-primary.postgresql-jiva',
   port: 5432,
 };
 

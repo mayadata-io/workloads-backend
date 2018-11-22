@@ -4,7 +4,7 @@ const router = express();
 
 router.post('/save', (req, res) => {
     const pquery = 'INSERT INTO person (rNumber, name, email, age) VALUES ';
-    const values = "";
+    let values = "";
     for (i = 0; i < req.body.length; i++) {
         if (i == req.body.length-1) {
             values = values + `( ${req.body[i].rNumber},' ${req.body[i].name}', '${req.body[i].email}', ${req.body[i].age})`

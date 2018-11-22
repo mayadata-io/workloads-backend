@@ -12,10 +12,12 @@ var connection = mysql.createConnection({
  
 connection.connect(function(err) {
   if (err) {
-    console.error('error in connecting perocna-jiva: ' + err.stack);
-    return;
+    console.error('error in connecting percona-jiva: ' + err.stack);
+    
+  }else{
+    console.log('percona-jiva connected as id ' + connection.threadId);
   }
-  console.log('perocna-jiva connected as id ' + connection.threadId);
+ 
 });
 
 module.exports = connection;

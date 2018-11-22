@@ -13,6 +13,9 @@ router.get("/volume", (req, res) => {
     }
   };
 
+
+  console.log(options);
+  console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
     if (err) {
       console.log("this is volume erro namespaces ");
@@ -21,8 +24,8 @@ router.get("/volume", (req, res) => {
      console.log(JSON.stringify(data));
       for (i = 0; i < data.items.length; i++) {
         if (
-          data.items[i].metadata.name.includes(req.query.workloadname) &&
-          data.items[i].metadata.name.includes(req.query.openebsengine)
+          data.items[i].metadata.namespace.includes(req.query.workloadname) &&
+          data.items[i].metadata.namespace.includes(req.query.openebsengine)
         ) {
           if (req.query.openebsengine.includes("cstor")) {
             mayaVolume.push({
