@@ -17,6 +17,14 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                     "spec": {
                         "serviceAccountName": "litmus",
                         "restartPolicy": "Never",
+                        "tolerations": [
+                            {
+                                "key": "infra-aid",
+                                "value": "observer",
+                                "operator": "Equal",
+                                "effect": "NoSchedule"
+                            }
+                        ],
                         "containers": [
                             {
                                 "name": "ansibletest",
@@ -50,6 +58,10 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                                     {
                                         "name": "DATA_PERSISTENCY",
                                         "value": ""
+                                    },
+                                    {
+                                        "name": "CHAOS_TYPE",
+                                        "value": "pool-delete"
                                     }
                                 ],
                                 "command": [

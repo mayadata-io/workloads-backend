@@ -47,6 +47,10 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                   {
                     "name": "LIVENESS_APP_NAMESPACE",
                     "value": ""
+                  },
+                  {
+                    "name": "DATA_PERSISTENCY",
+                    "value": ""
                   }
                 ],
                 "command": [

@@ -53,6 +53,18 @@ module.exports = function (appname, appnamespace, targetnamespace, volumename) {
                                     {
                                         "name": "LIVENESS_APP_NAMESPACE",
                                         "value": ""
+                                    },
+                                    {
+                                        "name": "DATA_PERSISTENCY",
+                                        "value": ""
+                                    },
+                                    {
+                                        "name": "CHAOS_TYPE",
+                                        "value": "target-kill"
+                                    },
+                                    {
+                                        "name": "TARGET_CONTAINER",
+                                        "value": "cstor-istgt"
                                     }
                                 ],
                                 "image": "openebs/ansible-runner:ci",

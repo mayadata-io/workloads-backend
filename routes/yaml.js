@@ -171,7 +171,7 @@ router.get('/yaml/logging', (req, res) => {
         workloadName: "elasticsearch",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
-        dashboardurl:"e2elogs.openebs.ci",
+        dashboardurl:"https://e2elogs.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
  });
