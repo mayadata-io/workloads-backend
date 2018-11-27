@@ -5,7 +5,7 @@ const config = {
   user: "testuser",
   database: "userdb",
   password: "password",
-  host: "pgset-primary.postgresql-cstor",
+  host: "postgresql-primary.postgresql-cstor",
   port: 5432
 };
 

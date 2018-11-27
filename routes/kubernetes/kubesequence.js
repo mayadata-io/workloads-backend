@@ -125,7 +125,7 @@ router.get("/sequence", (request, response) => {
       });
     });
   });}
-  else if(nameSpaces.includes("cstor")||nameSpaces.includes("logging") ){
+  else if(nameSpaces.includes("cstor")|| nameSpaces.includes("logging") ){
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
@@ -142,10 +142,18 @@ router.get("/sequence", (request, response) => {
           };
           return new Promise(function (resolve, reject) {
             for (i = 0; i < resp.body.items.length; i++) {
+              if(nameSpaces.includes("logging") && !resp.body.items[i].metadata.name.includes("clone")){
               pvcNodeDetails.pvc.push({
                 name: resp.body.items[i].metadata.name,
                 volumeName: resp.body.items[i].spec.volumeName
               });
+            }else if(nameSpaces.includes("cstor")){
+              pvcNodeDetails.pvc.push({
+                name: resp.body.items[i].metadata.name,
+                volumeName: resp.body.items[i].spec.volumeName
+              });
+            }
+
             }
             resolve(pvcNodeDetails);
           }).then(pvcNodeDetails => {

@@ -10,7 +10,7 @@ router.get('/yaml/mongo-jiva', (req, res) => {
         openebsEngine:"Jiva",
         dashboardurl:"",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/mongo-jiva/mongo-jiva-mongo.yaml"
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-jiva/mongo-jiva-mongo.yaml"
  });
 });
 router.get('/yaml/mongo-cstor', (req, res) => {
@@ -20,8 +20,8 @@ router.get('/yaml/mongo-cstor', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/mongo-cstor/mongo-cstor-mongo.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
 });
 router.get('/yaml/percona-jiva', (req, res) => {
@@ -31,8 +31,8 @@ router.get('/yaml/percona-jiva', (req, res) => {
         applicationType:"Deployment",
         openebsEngine:"Jiva",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/percona-jiva/percona-jiva-namespace.yaml",
-        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-jiva/percona-openebs-deployment.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-jiva/percona-jiva-namespace.yaml",
+        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-jiva/percona-openebs-deployment.yaml"
     });
 });
 router.get('/yaml/percona-cstor', (req, res) => {
@@ -42,7 +42,7 @@ router.get('/yaml/percona-cstor', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Deployment",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-cstor/percona-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
  });
 });
@@ -53,8 +53,8 @@ router.get('/yaml/cockroachdb-jiva', (req, res) => {
         applicationType:"Statefulset",
         openebsEngine:"Jiva",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
-        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/cockroachdb-jiva/cockroach-st.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroach-jiva/cockroachdb-jiva-namespace.yaml",
+        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroach-jiva/cockroach-st.yaml"
     });
 });
 
@@ -66,8 +66,8 @@ router.get('/yaml/cockroachdb-cstor', (req, res) => {
         applicationType:"Statefulset",
         openebsEngine:"cStor",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
-        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/cockroachdb-cstor/cockroach-st.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroachdb-cstor/cockroach-service.yaml",
+        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroachdb-cstor/cockroach-st.yaml"
     });
 });
 
@@ -78,8 +78,8 @@ router.get('/yaml/wordpress-nfs', (req, res) => {
         openebsEngine:"Jiva",
         applicationType:"Deployment",
         dashboardurl:"https://wordpressjiva.openebs.ci",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/wordpress-nfs/wordpress.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/wordpress-nfs/wordpress-nfs-namespaces.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/wordpress-nfs/nfs.yaml"
  });
 });
 
@@ -89,9 +89,9 @@ router.get('/yaml/grafana-cstor', (req, res) => {
         workloadName: "grafana",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"https://grafana-dashboard.openebs.ci/d/JOHe1vdiz/openebs-volume-stats?orgId=1",
+        dashboardurl:"https://grafana-dashboard.openebs.ci/",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/4c5c1761d8b710d16d755aece92eb2539eed73d6/production/grafana-cstor/grafana-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/grafana-cstor/grafana-cstor-deployment.yaml"
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/grafana-cstor/grafana-cstor-deployment.yaml"
  });
 });
 
@@ -102,9 +102,9 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         workloadName: "prometheus",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"https://prometheus-dashboard.openebs.ci/graph",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/prometheus-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/openebs-monitoring-org.yaml"
  });
 });
 router.get('/yaml/prometheus-jiva', (req, res) => {
@@ -113,9 +113,9 @@ router.get('/yaml/prometheus-jiva', (req, res) => {
         workloadName: "prometheus",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"https://prometheus-dashboard.openebs.ci/graph",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-mongo.yaml"
+        dashboardurl:"",
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-jiva/prometheus-jiva-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-jiva/openebs-monitoring-org.yaml"
  });
 });
 
@@ -126,8 +126,8 @@ router.get('/yaml/redis-cstor', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/redis-cstor/redis-statefulset.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/redis-cstor/redis-cstor_namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/redis-cstor/redis-statefulset.yaml"
  });
 });
 
@@ -138,8 +138,8 @@ router.get('/yaml/redis-jiva', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/redis-cstor/redis-statefulset.yaml"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/Redis-jiva/redis-jiva_namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/Redis-jiva/redis-statefulset.yaml"
  });
 });
 router.get('/yaml/postgresql-jiva', (req, res) => {
@@ -160,8 +160,8 @@ router.get('/yaml/postgresql-cstor', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
+        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/postgresql-cstor/postgresql-cstor-namespace.yaml",
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/postgresql-cstor/set.json"
  });
 });
 
@@ -173,7 +173,7 @@ router.get('/yaml/logging', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"https://e2elogs.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
+        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/efk-server/elasticsearch/es-statefulset.yaml"
  });
 });
 
