@@ -102,7 +102,7 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         workloadName: "prometheus",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"",
+        dashboardurl:"https://prometheuscstor.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/prometheus-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/openebs-monitoring-org.yaml"
  });
