@@ -11,11 +11,11 @@ const app = express();
 
 // cstor application
 
-// const mongocstor = require('./mongo-cstor/databasequery');
-// const perconacstor = require('./percona-cstor/databasequery');
-// const cockroachcstor = require('./cockroach-cstor/databasequery');
-// const rediscstor = require('./redis-cstor/databasequery');
-// const postgresqlcstor = require('./postgresql-cstor/databasequery');
+const mongocstor = require('./mongo-cstor/databasequery');
+const perconacstor = require('./percona-cstor/databasequery');
+const cockroachcstor = require('./cockroach-cstor/databasequery');
+const rediscstor = require('./redis-cstor/databasequery');
+const postgresqlcstor = require('./postgresql-cstor/databasequery');
 
 //jiva application
 
