@@ -27,11 +27,11 @@ const app = express();
 
 
 //cstor application
-// app.use('/mongo-cstor', mongocstor);
-// app.use('/percona-cstor', perconacstor);
+app.use('/mongo-cstor', mongocstor);
+app.use('/percona-cstor', perconacstor);
 // app.use('/cockroachdb-cstor', cockroachcstor);
-// app.use('/redis-cstor', rediscstor);
-// app.use('/postgresql-cstor', postgresqlcstor);
+app.use('/redis-cstor', rediscstor);
+app.use('/postgresql-cstor', postgresqlcstor);
 
 module.exports = app;
 
