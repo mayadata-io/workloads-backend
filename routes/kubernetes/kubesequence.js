@@ -187,7 +187,7 @@ router.get("/sequence", (request, response) => {
                   ) {
                  
                     podDetails.statefulSet.push({
-                      kind: res.body.items[i].metadata.ownerReferences[0].kind,
+                      // kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
                       namespace: res.body.items[i].metadata.namespace,
                       volumes: res.body.items[i].spec.volumes[0].name,
