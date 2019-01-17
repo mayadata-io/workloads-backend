@@ -28,7 +28,7 @@ router.get('/status', (req, resp) => {
         allStatus.podStatus.push({
           name: res.body.items[i].metadata.name,
           status: res.body.items[i].status.phase,
-          kind: res.body.items[i].metadata.ownerReferences[0].kind
+          // kind: res.body.items[i].metadata.ownerReferences[0].kind
         });
       }
       resolve(allStatus);
