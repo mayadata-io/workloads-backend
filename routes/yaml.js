@@ -182,7 +182,7 @@ router.get('/yaml/nuodb-cstor', (req, res) => {
         workloadName: "nuodb",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
-        dashboardurl:"https://insights.nuodb.com/G727BYVZKD/",
+        dashboardurl:"https://insights.nuodb.com/NEZ1J4N29B/",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/litmus/blob/master/apps/nuodb/deployers/nuodb.yaml"
  });
