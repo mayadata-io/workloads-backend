@@ -3,6 +3,26 @@ const express = require('express');
 const router = express();
 
 const k8sApi = k8s.Config.defaultClient();
+ 
+
+
+router.get('/openebsversion',(req, resp) => {
+  var openEbsVer="" ;
+
+  k8sApi.listNamespacedPod('openebs').then((res) => {
+    return new Promise(function (resolve, reject) {
+    for (i = 0; i < res.body.items.length; i++) {
+      if (res.body.items[i].metadata.name.includes("maya-")){
+        openEbsVer = res.body.items[i].spec.containers[0].image.substring(28);
+      }
+    }
+    resolve(openEbsVer); 
+  }).then(openEbsVer => {
+    resp.status(200).json(openEbsVer);
+  });
+  
+  });
+});
 
 router.get('/status', (req, resp) => {
   var overAllStatus = "";
@@ -17,6 +37,8 @@ router.get('/status', (req, resp) => {
     status: String,
     podStatus: []
   };
+
+
 
   k8sApi.listNamespacedPod(req.query.namespace).then(res => {
     return new Promise(function (resolve, reject) {
