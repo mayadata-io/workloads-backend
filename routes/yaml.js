@@ -2,21 +2,11 @@
 const express = require('express');
 const router = express();
 
-router.get('/yaml/mongo-jiva', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "mongo",
-        applicationType:"Statefulset",
-        openebsEngine:"Jiva",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/master/production/mongo-jiva/mongo-jiva-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-jiva/mongo-jiva-mongo.yaml"
- });
-});
+
 router.get('/yaml/mongo-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "mongo",
+        workloadName: "MongoDB",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
@@ -24,21 +14,11 @@ router.get('/yaml/mongo-cstor', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-cstor/mongo-cstor-mongo.yaml"
  });
 });
-router.get('/yaml/percona-jiva', (req, res) => {
-    res.status(200).json({
-        status: 200,
-        workloadName: "percona",
-        applicationType:"Deployment",
-        openebsEngine:"Jiva",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-jiva/percona-jiva-namespace.yaml",
-        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-jiva/percona-openebs-deployment.yaml"
-    });
-});
+
 router.get('/yaml/percona-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "percona",
+        workloadName: "Percona",
         openebsEngine:"cStor",
         applicationType:"Deployment",
         dashboardurl:"",
@@ -46,23 +26,11 @@ router.get('/yaml/percona-cstor', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
  });
 });
-router.get('/yaml/cockroachdb-jiva', (req, res) => {
-    res.status(200).json({
-        status: 200,
-        workloadName: "cockroachdb",
-        applicationType:"Statefulset",
-        openebsEngine:"Jiva",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroach-jiva/cockroachdb-jiva-namespace.yaml",
-        workloadyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/cockroach-jiva/cockroach-st.yaml"
-    });
-});
-
 
 router.get('/yaml/cockroachdb-cstor', (req, res) => {
     res.status(200).json({
         status: 200,
-        workloadName: "cockroachdb",
+        workloadName: "CockroachDB",
         applicationType:"Statefulset",
         openebsEngine:"cStor",
         dashboardurl:"",
@@ -71,11 +39,11 @@ router.get('/yaml/cockroachdb-cstor', (req, res) => {
     });
 });
 
-router.get('/yaml/wordpress-nfs', (req, res) => {
+router.get('/yaml/wordpressnfs-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "wordpress",
-        openebsEngine:"Jiva",
+        workloadName: "Wordpress",
+        openebsEngine:"cStor",
         applicationType:"Deployment",
         dashboardurl:"https://wordpressjiva.openebs.ci",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/wordpress-nfs/wordpress-nfs-namespaces.yaml",
@@ -86,7 +54,7 @@ router.get('/yaml/wordpress-nfs', (req, res) => {
 router.get('/yaml/grafana-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "grafana",
+        workloadName: "Grafana",
         openebsEngine:"cStor",
         applicationType:"Deployment",
         dashboardurl:"https://grafana-dashboard.openebs.ci/",
@@ -99,7 +67,7 @@ router.get('/yaml/grafana-cstor', (req, res) => {
 router.get('/yaml/prometheus-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "prometheus",
+        workloadName: "Prometheus",
         openebsEngine:"cStor",
         applicationType:"Deployment",
         dashboardurl:"https://prometheuscstor.openebs.ci",
@@ -107,22 +75,12 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/openebs-monitoring-org.yaml"
  });
 });
-router.get('/yaml/prometheus-jiva', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "prometheus",
-        openebsEngine:"cStor",
-        applicationType:"Deployment",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-jiva/prometheus-jiva-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-jiva/openebs-monitoring-org.yaml"
- });
-});
+
 
 router.get('/yaml/redis-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "redis",
+        workloadName: "Redis",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
@@ -131,32 +89,11 @@ router.get('/yaml/redis-cstor', (req, res) => {
  });
 });
 
-router.get('/yaml/redis-jiva', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "redis",
-        openebsEngine:"cStor",
-        applicationType:"Statefulset",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/Redis-jiva/redis-jiva_namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/Redis-jiva/redis-statefulset.yaml"
- });
-});
-router.get('/yaml/postgresql-jiva', (req, res) => {
-    res.status(200).json({ 
-        status: 200, 
-        workloadName: "postgresql",
-        openebsEngine:"Jiva",
-        applicationType:"Statefulset",
-        dashboardurl:"",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/postgresql-jiva/set.json"
- });
-});
+
 router.get('/yaml/postgresql-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "postgresql",
+        workloadName: "PostgreSql",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"",
@@ -168,7 +105,7 @@ router.get('/yaml/postgresql-cstor', (req, res) => {
 router.get('/yaml/logging', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "elasticsearch",
+        workloadName: "Elasticsearch",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"https://e2elogs.openebs.ci",
@@ -179,7 +116,7 @@ router.get('/yaml/logging', (req, res) => {
 router.get('/yaml/nuodb-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "nuodb",
+        workloadName: "NuoDB",
         openebsEngine:"cStor",
         applicationType:"Statefulset",
         dashboardurl:"https://insights.nuodb.com/3N5YV375G0/",
@@ -190,9 +127,9 @@ router.get('/yaml/nuodb-cstor', (req, res) => {
 router.get('/yaml/minio-cstor', (req, res) => {
     res.status(200).json({ 
         status: 200, 
-        workloadName: "minio",
+        workloadName: "MINIO",
         openebsEngine:"cStor",
-        applicationType:"Deployment",
+        applicationType:"StatefulSet",
         dashboardurl:"https://minio-dashboard.openebs.ci/minio/",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/openebs/blob/master/k8s/demo/minio/minio.yaml"
