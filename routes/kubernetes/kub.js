@@ -75,7 +75,7 @@ if( process.env.APP_NAME == undefined ){
     console.error( "provide app name");
   }else{
     listOfApp =  process.env.APP_NAME.split(" ");
-  
+    apiUrl = process.env.API_URL
     requests = listOfApp.map(name => {
       var overAllStatus = "";
       var overAllStatusCount = 0;
@@ -95,7 +95,7 @@ if( process.env.APP_NAME == undefined ){
           for (i = 0; i < res.body.items.length; i++) {
             allStatus.name = res.body.items[0].metadata.labels.name;
             allStatus.namespace = `${name}`;
-            allStatus.apiurl = 'https://workloads.openebs.ci/'
+            allStatus.apiurl = apiUrl
             
             if(res.body.items[0].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[0].metadata.ownerReferences[0].kind !== 'undefined'){
               allStatus.kind = res.body.items[0].metadata.ownerReferences[0].kind;	
