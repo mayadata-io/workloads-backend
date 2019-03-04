@@ -198,6 +198,16 @@ const router = express();
 //   });
 // });},1000);
 
+// promise all example
 
+// request = namespaces.map(name => {
+//   console.log(name);
+//   return k8sApi.listNamespacedPod(`${name}`).then(res =>  res);
+// });
+
+// Promise.all(request)
+// .then(responses => {  
+//   console.log(JSON.stringify(responses));
+// })
 
 module.exports = router;
