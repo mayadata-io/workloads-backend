@@ -89,29 +89,39 @@ setInterval( () =>{
       var allStatus = {
         status: String,
         appName: String,
-        podStatus: []
+        podStatus: [],
+        StatefulSet: {},
+        Deployment:{}
       };
       return k8sApi.listNamespacedPod(`${name}`).then(res => {
+        console.log("==================================pod details start========================================");
+        console.log(JSON.stringify(res.body));        
+        console.log("==================================pod details end========================================");
+
         return new Promise(function (resolve, reject) {
           for (i = 0; i < res.body.items.length; i++) {
             allStatus.name = res.body.items[0].metadata.labels.name;
             allStatus.namespace = `${name}`;
             allStatus.apiurl = apiUrl
-            
-            if(res.body.items[0].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[0].metadata.ownerReferences[0].kind !== 'undefined'){
-              allStatus.kind = res.body.items[0].metadata.ownerReferences[0].kind;	
+            if(typeof res.body.items[i].metadata.labels.type != 'undefined'){
+              console.log(res.body.items[i].metadata.labels.type +" " + res.body.items[i].metadata.name)
+            if(res.body.items[i].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[i].metadata.ownerReferences[0].kind !== 'undefined'){
+              allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name]	= allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name] ||0;
+              allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name]++;        
             }else{
-              allStatus.kind = 'Deployment';	
-            }	
-            if (status[res.body.items[i].status.phase] >= overAllStatusCount) {
+              allStatus.Deployment[res.body.items[i].metadata.ownerReferences[0].name]	= allStatus.Deployment[res.body.items[i].metadata.ownerReferences[0].name] ||0;
+              allStatus.Deployment[res.body.items[i].metadata.ownerReferences[0].name]++;
+            }}
+
+            if(status[res.body.items[i].status.phase] >= overAllStatusCount) {
               overAllStatusCount = res.body.items[i].status.phase;
-              allStatus.status = res.body.items[i].status.phase;
-          
+              allStatus.status = res.body.items[i].status.phase;          
             }
             allStatus.podStatus.push({
               name: res.body.items[i].metadata.name,
               status: res.body.items[i].status.phase,
             });
+            
           }
           resolve(allStatus);
       })
@@ -119,7 +129,7 @@ setInterval( () =>{
     });
 }
 
-},50000)
+},5000)
 
 if( process.env.APP_NAME == undefined ){
     console.error( "provide app name");
