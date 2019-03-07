@@ -7,7 +7,7 @@ const k8sApi = k8s.Config.defaultClient();
 router.get("/sequence", (request, response) => {
   nameSpaces = request.query.appnamespace;
   volumeNameSpaces = request.query.volumenamespace
-  if(nameSpaces.includes("jiva") || nameSpaces.includes("nfs")){
+  if(nameSpaces.includes("jiva")){
   k8sApi.listNode().then(resNode => {
     return new Promise(function(resolve, reject) {
       var listNode = [];
@@ -70,6 +70,7 @@ router.get("/sequence", (request, response) => {
                   podDetails.statefulSet.push({
                     kind: res.body.items[i].metadata.ownerReferences[0].kind,
                     name: res.body.items[i].metadata.name,
+                    imageName: res.body.items[i].labels.workload_app_name,
                     namespace: res.body.items[i].metadata.namespace,
                     volumes: res.body.items[i].spec.volumes[0].name,
                     pvc:
@@ -125,7 +126,7 @@ router.get("/sequence", (request, response) => {
       });
     });
   });}
-  else if(nameSpaces.includes("cstor")|| nameSpaces.includes("logging") ){
+  else if(nameSpaces.includes("cstor") || nameSpaces.includes("mule-shop")|| nameSpaces.includes("logging") ){
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
@@ -142,18 +143,13 @@ router.get("/sequence", (request, response) => {
           };
           return new Promise(function (resolve, reject) {
             for (i = 0; i < resp.body.items.length; i++) {
-              if(nameSpaces.includes("logging") && !resp.body.items[i].metadata.name.includes("clone")){
-              pvcNodeDetails.pvc.push({
-                name: resp.body.items[i].metadata.name,
-                volumeName: resp.body.items[i].spec.volumeName
-              });
-            }else if(nameSpaces.includes("cstor")){
+              if(resp.body.items[i].metadata.annotations["volume.beta.kubernetes.io/storage-provisioner"] != 'undefiend' && resp.body.items[i].metadata.annotations["volume.beta.kubernetes.io/storage-provisioner"] == "openebs.io/provisioner-iscsi")
+              {
               pvcNodeDetails.pvc.push({
                 name: resp.body.items[i].metadata.name,
                 volumeName: resp.body.items[i].spec.volumeName
               });
             }
-
             }
             resolve(pvcNodeDetails);
           }).then(pvcNodeDetails => {
@@ -187,9 +183,10 @@ router.get("/sequence", (request, response) => {
                   ) {
                  
                     podDetails.statefulSet.push({
-                      // kind: res.body.items[i].metadata.ownerReferences[0].kind,
+                      kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
                       namespace: res.body.items[i].metadata.namespace,
+                      imageName: res.body.items[i].metadata.labels["workload_app_name"],
                       volumes: res.body.items[i].spec.volumes[0].name,
                       pvc:
                         res.body.items[i].spec.volumes[0].persistentVolumeClaim
@@ -209,8 +206,7 @@ router.get("/sequence", (request, response) => {
                   return new Promise(function (resolve, reject) {
                     for (i = 0; i < re.body.items.length; i++) {
                       if (
-                        typeof re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'] !== 'undefined' &&
-                        re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'].includes(nameSpaces)                      
+                        typeof re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'] !== 'undefined'                     
                       ) {
 
                         podDetails.jivaController.push({

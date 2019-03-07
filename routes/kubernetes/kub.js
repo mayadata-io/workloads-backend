@@ -94,18 +94,19 @@ setInterval( () =>{
         Deployment:{}
       };
       return k8sApi.listNamespacedPod(`${name}`).then(res => {
-        console.log("==================================pod details start========================================");
-        console.log(JSON.stringify(res.body));        
-        console.log("==================================pod details end========================================");
-
         return new Promise(function (resolve, reject) {
+         let groupCount = 0 ;
           for (i = 0; i < res.body.items.length; i++) {
-            allStatus.name = res.body.items[0].metadata.labels.name;
+
             allStatus.namespace = `${name}`;
+            
             allStatus.apiurl = apiUrl
-            if(typeof res.body.items[i].metadata.labels.type != 'undefined'){
-              console.log(res.body.items[i].metadata.labels.type +" " + res.body.items[i].metadata.name)
-            if(res.body.items[i].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[i].metadata.ownerReferences[0].kind !== 'undefined'){
+            if(typeof res.body.items[i].metadata.labels.workload_openebs_name != 'undefined'){
+              
+           if(allStatus.name != " "){
+              allStatus.name = res.body.items[i].metadata.labels.workload_openebs_name
+           }
+              if(res.body.items[i].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[i].metadata.ownerReferences[0].kind !== 'undefined'){
               allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name]	= allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name] ||0;
               allStatus.StatefulSet[res.body.items[i].metadata.ownerReferences[0].name]++;        
             }else{
@@ -117,12 +118,21 @@ setInterval( () =>{
               overAllStatusCount = res.body.items[i].status.phase;
               allStatus.status = res.body.items[i].status.phase;          
             }
+            
             allStatus.podStatus.push({
               name: res.body.items[i].metadata.name,
               status: res.body.items[i].status.phase,
             });
             
           }
+          allStatus.groupCount=(Object.keys(allStatus.Deployment).length + Object.keys(allStatus.StatefulSet).length);
+          if(Object.keys(allStatus.Deployment).length + Object.keys(allStatus.StatefulSet).length>1){
+            allStatus.group= 'Grouped'
+          }else{
+            allStatus.group= 'Standalone'
+          }
+          allStatus.numberOfDeployment=Object.keys(allStatus.Deployment).length
+          allStatus.numberOfStatefulset = Object.keys(allStatus.StatefulSet).length
           resolve(allStatus);
       })
       })
@@ -130,54 +140,6 @@ setInterval( () =>{
 }
 
 },5000)
-
-if( process.env.APP_NAME == undefined ){
-    console.error( "provide app name");
-  }else{
-    listOfApp =  process.env.APP_NAME.split(" ");
-    apiUrl = process.env.API_URL
-    requests = listOfApp.map(name => {
-      var overAllStatus = "";
-      var overAllStatusCount = 0;
-      var status = {
-        Running: 0,
-        Pending: 1,
-        Failed: 2,
-        Unknown: 3
-      };
-      var allStatus = {
-        status: String,
-        appName: String,
-        podStatus: []
-      };
-      return k8sApi.listNamespacedPod(`${name}`).then(res => {
-        return new Promise(function (resolve, reject) {
-          for (i = 0; i < res.body.items.length; i++) {
-            allStatus.name = res.body.items[0].metadata.labels.name;
-            allStatus.namespace = `${name}`;
-            allStatus.apiurl = apiUrl
-            
-            if(res.body.items[0].metadata.ownerReferences[0].kind == 'StatefulSet' && res.body.items[0].metadata.ownerReferences[0].kind !== 'undefined'){
-              allStatus.kind = res.body.items[0].metadata.ownerReferences[0].kind;	
-            }else{
-              allStatus.kind = 'Deployment';	
-            }	
-            if (status[res.body.items[i].status.phase] >= overAllStatusCount) {
-              overAllStatusCount = res.body.items[i].status.phase;
-              allStatus.status = res.body.items[i].status.phase;
-          
-            }
-            allStatus.podStatus.push({
-              name: res.body.items[i].metadata.name,
-              status: res.body.items[i].status.phase,
-            });
-          }
-          resolve(allStatus);
-      })
-      })
-    });
-}
-
 
 router.get('/statuses', (request,resp)=>{
   Promise.all(requests)
