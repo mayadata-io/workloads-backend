@@ -66,7 +66,7 @@ router.get("/sequence", (request, response) => {
                   }else{
                     dimage=(res.body.items[i].spec.containers[0].image)
                   }
-                  
+                  podDetails.openebsAppName = res.body.items[i].metadata.labels.workload_openebs_name
                   podDetails.statefulSet.push({
                     kind: res.body.items[i].metadata.ownerReferences[0].kind,
                     name: res.body.items[i].metadata.name,
@@ -181,7 +181,7 @@ router.get("/sequence", (request, response) => {
                     res.body.items[i].metadata.labels.type ==
                     "workload"
                   ) {
-                 
+                    podDetails.openebsAppName = res.body.items[i].metadata.labels.workload_openebs_name                 
                     podDetails.statefulSet.push({
                       kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
