@@ -1,0 +1,24 @@
+{
+  "name": "workload-aggregator",
+  "version": "1.0.0",
+  "description": "Application which will pull all the data from separate cluster",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "author": "Intakhab Ali",
+  "license": "ISC"
+}
