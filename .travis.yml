@@ -3,16 +3,18 @@ sudo: required
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::7}
+sudo: required
 services:
   - docker
+before_install:
+  - chmod +x build.sh
+  - chmod +x push.sh
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" 
 script:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
+  - echo $pwd
+  - ./build.sh
 after_success:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/dashboard-backend;
-   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
-  fi
-- if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/staging-dashboard-backend;
-   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"&& docker build -t $REPO:$COMMIT . && docker push $REPO; 
-  fi  
+  - ./push.sh
 
