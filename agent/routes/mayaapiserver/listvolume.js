@@ -13,21 +13,25 @@ router.get("/volume", (req, res) => {
     }
   };
 
-
+  numberOfPVC = JSON.parse(req.query.pvcDetails).length;
+  x= JSON.parse(req.query.pvcDetails)
+  console.log(numberOfPVC + " " + x);
+  for (let j=0; j<numberOfPVC; j++ ){
+    console.log(JSON.stringify(x[j]));
+  }
   console.log(options);
   console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
     if (err) {
       console.log("this is volume erro namespaces ");
-    } else {
+    } else { 
       data = JSON.parse(body);
      console.log(JSON.stringify(data));
-      for (i = 0; i < data.items.length; i++) {
-        if (
-          data.items[i].metadata.namespace.includes(req.query.workloadname) &&
-          data.items[i].metadata.namespace.includes(req.query.openebsengine)
-        ) {
-          if (req.query.openebsengine.includes("cstor")) {
+      for (let j=0; j<numberOfPVC; j++ ){
+        console.log(req.query.pvcDetails[j]);
+      
+       for (i = 0; i < data.items.length; i++) {
+            if(req.query.pvcDetails[j].volumeName == data.items[i].metadata.name){
             mayaVolume.push({
               name: data.items[i].metadata.name,
               size:
@@ -40,26 +44,7 @@ router.get("/volume", (req, res) => {
               kind: data.items[i].kind,
               castype: data.items[i].spec.casType
             });
-          } else {
-            mayaVolume.push({
-              name: data.items[i].metadata.name,
-              size:
-                data.items[i].metadata.annotations["openebs.io/volume-size"],
-              status:
-                data.items[i].metadata.annotations[
-                  "openebs.io/controller-status"
-                ],
-              replicas:
-                data.items[i].metadata.annotations[
-                  "vsm.openebs.io/replica-count"
-                ],
-              kind: data.items[i].kind,
-              castype: data.items[i].spec.casType
-            });
-          }
-        }
-      }
-    }
+      }}}}
 
     res.status(200).json(mayaVolume);
   });
