@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express();
 
-clusterDomain = process.env.APP_NAME.split(' ');
+clusterDomain = process.env.CLUSTER_DOMAIN.split(' ');
 
 router.get('/', (req, res) => {
 
