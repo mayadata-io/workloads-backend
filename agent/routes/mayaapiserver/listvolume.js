@@ -24,12 +24,14 @@ router.get("/volume", (req, res) => {
       data = JSON.parse(body);
     //  console.log(JSON.stringify(data));
       for (let j=0; j<numberOfPVC; j++ ){
-        console.log(req.query.pvcDetails[j]);
-      
+        console.log(req.query.pvcDetails[j] + "bhhh");
+        console.log(x[j] + "x");
+        console.log(x[i].volumeName +" volume name")
+        console.log(x[i].name + "pvc name");
        for (i = 0; i < data.items.length; i++) {
-        console.log(i +" "+ req.query.pvcDetails[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
-            if(req.query.pvcDetails[j].volumeName == data.items[i].metadata.name){
-              console.log(i +" "+ req.query.pvcDetails[j].volumeName +" "+ data.items[i].metadata.name)
+        console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
+            if(x[j].volumeName == data.items[i].metadata.name){
+              console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name)
             mayaVolume.push({
               name: data.items[i].metadata.name,
               size:
