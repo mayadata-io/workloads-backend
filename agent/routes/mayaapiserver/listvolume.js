@@ -14,7 +14,7 @@ router.get("/volume", (req, res) => {
   };
 
   numberOfPVC = JSON.parse(req.query.pvcDetails).length;
-  x= JSON.parse(req.query.pvcDetails)
+  
   console.log(options);
   console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
@@ -22,12 +22,20 @@ router.get("/volume", (req, res) => {
       console.log("this is volume error namespaces");
     } else { 
       data = JSON.parse(body);
+      x = JSON.parse(req.query.pvcDetails)
     //  console.log(JSON.stringify(data));
       for (let j=0; j<numberOfPVC; j++ ){
-        console.log(req.query.pvcDetails[j] + "bhhh");
-        console.log(x[j] + "x");
+        console.log(x + "x");
+        console.log(JSON.parse(x[i]).volumeName +" volume name");
+        console.log(JSON.parse(x[i]).name + "pvc name");
+        console.log(JSON.parse(req.query.pvcDetails[j]) + "bhhh");
+        console.log(JSON.parse(req.query.pvcDetails[j]).volumeName + "bhhh");
+        console.log("====================================================")
+        console.log(x + "x");
         console.log(x[i].volumeName +" volume name")
         console.log(x[i].name + "pvc name");
+
+
        for (i = 0; i < data.items.length; i++) {
         console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
             if(x[j].volumeName == data.items[i].metadata.name){
