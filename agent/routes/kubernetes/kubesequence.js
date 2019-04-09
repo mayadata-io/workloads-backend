@@ -19,7 +19,7 @@ router.get("/sequence", (request, response) => {
       k8sApi.listNamespacedPersistentVolumeClaim(nameSpaces).then(resp => {
         var pvcNodeDetails = {
           pvc: [],
-          numberOfPvc: resp.body.items.length,
+          numberOfPVC: resp.body.items.length,
           nodes: listNode
         };
         return new Promise(function(resolve, reject) {
@@ -138,7 +138,7 @@ router.get("/sequence", (request, response) => {
         k8sApi.listNamespacedPersistentVolumeClaim(nameSpaces).then(resp => {
           var pvcNodeDetails = {
             pvc: [],
-            numberOfPvc: resp.body.items.length,
+            numberOfPVC: resp.body.items.length,
             nodes: listNode
           };
           return new Promise(function (resolve, reject) {
