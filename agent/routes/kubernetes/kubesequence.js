@@ -45,7 +45,7 @@ router.get("/sequence", (request, response) => {
               applicationPod: [],
               jivaController: [],
               jivaReplica: [],
-              pvc: pvcNodeDetails
+              pvcs: pvcNodeDetails
             };
             return new Promise(function(resolve, reject) {
               for (i = 0; i < res.body.items.length; i++) {
@@ -167,7 +167,7 @@ router.get("/sequence", (request, response) => {
                 applicationPod: [],
                 jivaController: [],
                 jivaReplica: [],
-                pvc: pvcNodeDetails
+                pvcs: pvcNodeDetails
               };
               return new Promise(function (resolve, reject) {
                 for (i = 0; i < res.body.items.length; i++) {
