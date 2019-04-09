@@ -28,7 +28,7 @@ router.get("/volume", (req, res) => {
         // console.log(x + "x");
         // console.log(JSON.parse(x[i]).volumeName +" volume name");
         // console.log(JSON.parse(x[i]).name + "pvc name");
-        console.log(JSON.parse(req.query.pvcDetails[j]) + "bhhh");
+        console.log(JSON.parse(req.query.pvcDetails[j]).name + "bhhh");
         console.log(JSON.parse(req.query.pvcDetails[j]).volumeName + "bhhh");
         console.log("====================================================")
         console.log(x + "x");
