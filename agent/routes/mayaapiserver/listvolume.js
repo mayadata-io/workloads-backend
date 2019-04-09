@@ -15,23 +15,21 @@ router.get("/volume", (req, res) => {
 
   numberOfPVC = JSON.parse(req.query.pvcDetails).length;
   x= JSON.parse(req.query.pvcDetails)
-  console.log(numberOfPVC + " " + x);
-  for (let j=0; j<numberOfPVC; j++ ){
-    console.log(JSON.stringify(x[j]));
-  }
   console.log(options);
   console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
     if (err) {
       console.log("this is volume error namespaces");
     } else { 
-      data = JSON.parse(body);
-     console.log(JSON.stringify(data));
+      // data = JSON.parse(body);
+    //  console.log(JSON.stringify(data));
       for (let j=0; j<numberOfPVC; j++ ){
         console.log(req.query.pvcDetails[j]);
       
        for (i = 0; i < data.items.length; i++) {
+        console.log(i +" "+ req.query.pvcDetails[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
             if(req.query.pvcDetails[j].volumeName == data.items[i].metadata.name){
+              console.log(i +" "+ req.query.pvcDetails[j].volumeName +" "+ data.items[i].metadata.name)
             mayaVolume.push({
               name: data.items[i].metadata.name,
               size:
