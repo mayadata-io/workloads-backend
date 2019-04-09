@@ -21,7 +21,7 @@ router.get("/volume", (req, res) => {
     if (err) {
       console.log("this is volume error namespaces");
     } else { 
-      // data = JSON.parse(body);
+      data = JSON.parse(body);
     //  console.log(JSON.stringify(data));
       for (let j=0; j<numberOfPVC; j++ ){
         console.log(req.query.pvcDetails[j]);
