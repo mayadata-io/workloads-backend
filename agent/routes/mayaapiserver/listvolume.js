@@ -14,7 +14,10 @@ router.get("/volume", (req, res) => {
   };
 
   numberOfPVC = JSON.parse(req.query.pvcDetails).length;
-  
+  for(i=0; i<numberOfPVC;i++){
+    
+    console.log(JSON.parse(req.query.pvcDetails)[i].volumeName);
+  }
   console.log(options);
   console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
@@ -28,18 +31,14 @@ router.get("/volume", (req, res) => {
         // console.log(x + "x");
         // console.log(JSON.parse(x[i]).volumeName +" volume name");
         // console.log(JSON.parse(x[i]).name + "pvc name");
-        console.log(JSON.parse(req.query.pvcDetails[j]).name + "bhhh");
-        console.log(JSON.parse(req.query.pvcDetails[j]).volumeName + "bhhh");
+        console.log(JSON.parse(req.query.pvcDetails)[j].name + "bhhh");
+        console.log(JSON.parse(req.query.pvcDetails)[j].volumeName + "bhhh");
         console.log("====================================================")
-        console.log(x + "x");
-        console.log(x[i].volumeName +" volume name")
-        console.log(x[i].name + "pvc name");
-
 
        for (i = 0; i < data.items.length; i++) {
-        console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
-            if(x[j].volumeName == data.items[i].metadata.name){
-              console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name)
+        // console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
+            if(JSON.parse(req.query.pvcDetails)[j].volumeName == data.items[i].metadata.name){
+              // console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name)
             mayaVolume.push({
               name: data.items[i].metadata.name,
               size:
