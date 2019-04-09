@@ -23,7 +23,7 @@ router.get("/volume", (req, res) => {
   console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
     if (err) {
-      console.log("this is volume erro namespaces ");
+      console.log("this is volume error namespaces");
     } else { 
       data = JSON.parse(body);
      console.log(JSON.stringify(data));
