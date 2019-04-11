@@ -22,7 +22,7 @@ router.get('/yaml/percona-cstor', (req, res) => {
         workloadName: "Percona",
         openebsEngine:"cStor",
         applicationType:"Deployment",
-        dashboardurl:"#",
+        grafanaDashboard: "#",
         urlApi:"https://workloads.openebs.ci/",
         nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-cstor/percona-cstor-namespace.yaml",
         workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
