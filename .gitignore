@@ -9,6 +9,7 @@
 /node_modules
 package-lock.json
 /package-lock.json
+node_modules/
 
 # IDEs and editors
 /.idea
