@@ -11,8 +11,7 @@ router.get('/yaml/mongo-cstor', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"#",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/mongo-cstor/mongo-cstor-mongo.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/mongo.html"
  });
 });
 
@@ -23,9 +22,9 @@ router.get('/yaml/percona-cstor', (req, res) => {
         openebsEngine:"cStor",
         applicationType:"Deployment",
         grafanaDashboard: "#",
+        dashboardurl:"",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/percona-cstor/percona-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/d536275e8c3d78f5c8ce1728b07eee26653b5056/production/percona-cstor/percona-openebs-deployment.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/percona.html"
  });
 });
 
@@ -50,8 +49,7 @@ router.get('/yaml/wordpressnfs-cstor', (req, res) => {
         applicationType:"Deployment",
         dashboardurl:"https://wordpress.openebs.ci/",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/wordpress-nfs/wordpress-nfs-namespaces.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/wordpress-nfs/nfs.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/rwm.html"
  });
 });
 
@@ -77,8 +75,7 @@ router.get('/yaml/prometheus-cstor', (req, res) => {
         applicationType:"Deployment",
         dashboardurl:"https://prometheus.openebs.ci",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/prometheus-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/prometheus-cstor/openebs-monitoring-org.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/prometheus.html"
  });
 });
 
@@ -91,8 +88,7 @@ router.get('/yaml/redis-cstor', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"#",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/redis-cstor/redis-cstor_namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/redis-cstor/redis-statefulset.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/redis.html"
  });
 });
 
@@ -105,8 +101,7 @@ router.get('/yaml/postgresql-cstor', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"#",
         urlApi:"https://workloads.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/postgresql-cstor/postgresql-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/postgresql-cstor/set.json"
+        workloadyaml:"https://docs.openebs.io/docs/next/postgres.html"
  });
 });
 
@@ -119,8 +114,7 @@ router.get('/yaml/nuodb-cstor', (req, res) => {
         applicationType:"Statefulset",
         urlApi:"https://workloads.openebs.ci/",
         dashboardurl:"https://insights.nuodb.com/3N5YV375G0/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/litmus/blob/master/apps/nuodb/deployers/nuodb.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/nuodb.html"
  });
 });
 router.get('/yaml/minio-cstor', (req, res) => {
@@ -131,8 +125,7 @@ router.get('/yaml/minio-cstor', (req, res) => {
         applicationType:"StatefulSet",
         urlApi:"https://workloads.openebs.ci/",
         dashboardurl:"https://minio.openebs.ci/minio/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/openebs/blob/master/k8s/demo/minio/minio.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/minio.html"
  });
 });
 router.get('/yaml/default', (req, res) => {
@@ -143,8 +136,7 @@ router.get('/yaml/default', (req, res) => {
         applicationType:"StatefulSet",
         urlApi:"https://workload-gitlab.openebs.ci/",
         dashboardurl:"https://gitlab.openebs.ci/openebs/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/openebs/blob/master/k8s/demo/minio/minio.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/gitlab.html"
  });
 });
 router.get('/yaml/logging', (req, res) => {
@@ -155,8 +147,18 @@ router.get('/yaml/logging', (req, res) => {
         applicationType:"Statefulset",
         dashboardurl:"https://e2e-logs.openebs100.io/app/kibana#/discover?_g=()&_a=(columns:!(_source),index:cluster-logs,interval:auto,query:(language:lucene,query:''),sort:!('@timestamp',desc))",
         urlApi:"https://workload-gitlab.openebs.ci/",
-        nameSpaceyaml: "https://github.com/openebs/e2e-infrastructure/blob/816ae44f1bd9c886ce506a72b542edcb323a50b3/production/mongo-cstor/mongo-cstor-namespace.yaml",
-        workloadyaml:"https://github.com/openebs/e2e-infrastructure/blob/54fe55c5da8b46503e207fe0bc08f9624b31e24c/production/efk-server/elasticsearch/es-statefulset.yaml"
+        workloadyaml:"https://docs.openebs.io/docs/next/elasticsearch.html"
+ });
+});
+router.get('/yaml/muleshop-cstor', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "MuleShop",
+        openebsEngine:"cStor",
+        applicationType:"Statefulset",
+        dashboardurl:"https://muleshop.openebs.ci/",
+        urlApi:"https://workloads.openebs.ci/",
+        workloadyaml:""
  });
 });
 module.exports = router;
