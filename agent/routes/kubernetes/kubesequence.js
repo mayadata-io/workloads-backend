@@ -126,7 +126,7 @@ router.get("/sequence", (request, response) => {
       });
     });
   });}
-  else if(nameSpaces.includes("cstor") || nameSpaces.includes("mule-shop")|| nameSpaces.includes("logging") ){
+  else if(nameSpaces.includes("cstor") || nameSpaces.includes("mule-shop")|| nameSpaces.includes("logging") || nameSpaces.includes("default") ){
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
