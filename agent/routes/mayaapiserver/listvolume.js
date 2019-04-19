@@ -14,26 +14,13 @@ router.get("/volume", (req, res) => {
   };
 
   numberOfPVC = JSON.parse(req.query.pvcDetails).length;
-  for(i=0; i<numberOfPVC;i++){
-    
-    console.log(JSON.parse(req.query.pvcDetails)[i].volumeName);
-  }
-  console.log(options);
-  console.log("=======================================================================================================")
   http.get(options, function(err, resp, body) {
     if (err) {
       console.log("this is volume error namespaces");
     } else { 
       data = JSON.parse(body);
       x = JSON.parse(req.query.pvcDetails)
-    //  console.log(JSON.stringify(data));
       for (let j=0; j<numberOfPVC; j++ ){
-        // console.log(x + "x");
-        // console.log(JSON.parse(x[i]).volumeName +" volume name");
-        // console.log(JSON.parse(x[i]).name + "pvc name");
-        console.log(JSON.parse(req.query.pvcDetails)[j].name + "bhhh");
-        console.log(JSON.parse(req.query.pvcDetails)[j].volumeName + "bhhh");
-        console.log("====================================================")
 
        for (i = 0; i < data.items.length; i++) {
         // console.log(i +" "+ x[j].volumeName +" "+ data.items[i].metadata.name + "gfcgfcgfcj")
