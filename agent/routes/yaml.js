@@ -161,4 +161,15 @@ router.get('/yaml/muleshop-cstor', (req, res) => {
         workloadyaml:""
  });
 });
+router.get('/yaml/mule-shop', (req, res) => {
+    res.status(200).json({ 
+        status: 200, 
+        workloadName: "MuleShop",
+        openebsEngine:"cStor",
+        applicationType:"Statefulset",
+        dashboardurl:"https://muleshop.openebs.ci/",
+        urlApi:"https://workloads.openebs.ci/",
+        workloadyaml:""
+ });
+});
 module.exports = router;

@@ -4,6 +4,7 @@ const router = express();
 
 const k8sApi = k8s.Config.defaultClient();
 
+
 router.get("/sequence", (request, response) => {
   nameSpaces = request.query.appnamespace;
   volumeNameSpaces = request.query.volumenamespace
@@ -14,8 +15,9 @@ router.get("/sequence", (request, response) => {
       for (i = 0; i < resNode.body.items.length; i++) {
         listNode[resNode.body.items[i].metadata.name] = "Node-" + (i + 1);
       }
+      listNode.push({"kubeletVersion":resNode.body.items[0].status.nodeInfo.kubeletVersion});
       resolve(listNode);
-    }).then(listNode => {
+    }).then(listNode => {  
       k8sApi.listNamespacedPersistentVolumeClaim(nameSpaces).then(resp => {
         var pvcNodeDetails = {
           pvc: [],
@@ -130,9 +132,11 @@ router.get("/sequence", (request, response) => {
     k8sApi.listNode().then(resNode => {
       return new Promise(function (resolve, reject) {
         var listNode = [];
+        let regexExpKubernetesVersion= /v[0-9][0-9]?.[0-9][0-9].[0-9][0-9]?/g;
         for (i = 0; i < resNode.body.items.length; i++) {
           listNode[resNode.body.items[i].metadata.name] = "Node-" + (i + 1);
         }
+        listNode.push({"kubeletVersion":(resNode.body.items[0].status.nodeInfo.kubeletVersion).match(regexExpKubernetesVersion)[0]});
         resolve(listNode);
       }).then(listNode => {
         k8sApi.listNamespacedPersistentVolumeClaim(nameSpaces).then(resp => {
@@ -181,16 +185,20 @@ router.get("/sequence", (request, response) => {
                     res.body.items[i].metadata.labels.type ==
                     "workload"
                   ) {
-                    podDetails.openebsAppName = res.body.items[i].metadata.labels.workload_openebs_name                 
+                    podDetails.openebsAppName = res.body.items[i].metadata.labels.workload_openebs_name
+                    let totalvolume=res.body.items[i].spec.volumes.length;
+                    for(volumelength=0; volumelength<totalvolume; volumelength++){
+                      if(typeof res.body.items[i].spec.volumes[volumelength].persistentVolumeClaim !== 'undefined'){
+                        pvcname = res.body.items[i].spec.volumes[volumelength].persistentVolumeClaim.claimName
+                      }
+                    }
                     podDetails.statefulSet.push({
                       kind: res.body.items[i].metadata.ownerReferences[0].kind,
                       name: res.body.items[i].metadata.name,
                       namespace: res.body.items[i].metadata.namespace,
                       imageName: res.body.items[i].metadata.labels["workload_app_name"],
                       volumes: res.body.items[i].spec.volumes[0].name,
-                      pvc:
-                        res.body.items[i].spec.volumes[0].persistentVolumeClaim
-                          .claimName,
+                      pvc: pvcname,
                       status: res.body.items[i].status.phase,
                       nodeName: res.body.items[i].spec.nodeName,
                       dockerImage: res.body.items[i].spec.containers[0].image,
@@ -199,16 +207,15 @@ router.get("/sequence", (request, response) => {
                     });
                   }
                 }
-  
                 resolve(podDetails);
               }).then(podDetails => {
                 k8sApi.listNamespacedPod('openebs').then(re => {
                   return new Promise(function (resolve, reject) {
+                    let openebsVersion = (re.body.items[i].spec.containers[0].image).match(/[0-9][0-9]?.[0-9][0-9]?.[0-9][0-9]?/g)[0]; 
                     for (i = 0; i < re.body.items.length; i++) {
                       if (
                         typeof re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'] !== 'undefined'                     
                       ) {
-
                         podDetails.jivaController.push({
                           kind: re.body.items[i].metadata.ownerReferences[0].kind,
                           name: re.body.items[i].metadata.name,
@@ -218,12 +225,10 @@ router.get("/sequence", (request, response) => {
                           node:
                             pvcNodeDetails.nodes[re.body.items[i].spec.nodeName],
                           status: re.body.items[i].status.phase,
-                          openebsjivaversion:
-                            re.body.items[i].spec.containers[0].image                            
+                          openebsVersion: openebsVersion
                         });
                       }
                     }
-  
                     resolve(podDetails);
                   }).then(podDetails => {
                     response.status(200).json(podDetails);
