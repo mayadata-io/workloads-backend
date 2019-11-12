@@ -209,9 +209,10 @@ router.get("/sequence", (request, response) => {
                 }
                 resolve(podDetails);
               }).then(podDetails => {
+
                 k8sApi.listNamespacedPod('openebs').then(re => {
                   return new Promise(function (resolve, reject) {
-                    let openebsVersion = (re.body.items[0].spec.containers[0].image).match(/[0-9][0-9]?.[0-9][0-9]?.[0-9][0-9]?/g)[0];
+                    let openebsVersion = (re.body.items[0].spec.containers[0].image).split(':')[1];
                     for (i = 0; i < re.body.items.length; i++) {
                       if (
                         typeof re.body.items[i].metadata.labels['openebs.io/persistent-volume-claim'] !== 'undefined'                     
